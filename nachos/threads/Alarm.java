@@ -162,6 +162,8 @@ public class Alarm {
 
     //threadQ.peek().thread.ready();
 	ThreadedKernel.alarm.waitUntil(20000);
+	
+	System.out.println("-----------End All Alarm Tests-------------\n");
         
     }
 }
