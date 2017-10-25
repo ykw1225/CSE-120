@@ -3,3 +3,8 @@ FAIL : CV2 - N sleepers, N wakers
 FAIL : COMM - 1 message, 1 speak, 1 listen
 PASS : JOIN - before thread finishes
 PASS : ALARM - Tests waitUntil to ensure it waits at least minimum amount of time
+------[ Wed Oct 25 02:00:31 2017 ]------
+FAIL : CV2 - N sleepers, N wakers
+PASS : COMM - 1 message, 1 speak, 1 listen
+PASS : JOIN - before thread finishes
+PASS : ALARM - Tests waitUntil to ensure it waits at least minimum amount of time

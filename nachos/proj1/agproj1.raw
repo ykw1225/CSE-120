@@ -1,4 +1,4 @@
-------[ Wed Oct 25 01:30:35 2017 ]------
+------[ Wed Oct 25 02:00:31 2017 ]------
 --[ CV2 - N sleepers, N wakers ]--
 stty: standard input: Inappropriate ioctl for device
 stty: standard input: Inappropriate ioctl for device
@@ -23,14 +23,7 @@ stty: standard input: Inappropriate ioctl for device
 stty: standard input: Inappropriate ioctl for device
 nachos 5.0j initializing... config interrupt timer elevators user-check grader
 
-nachos.machine.AssertionFailureError: speak returned before corresponding listen called
-	at nachos.machine.Lib.assertTrue(Lib.java:89)
-	at nachos.ag.ThreadGrader2.run(ThreadGrader2.java:64)
-	at nachos.ag.AutoGrader.start(AutoGrader.java:47)
-	at nachos.machine.Machine$1.run(Machine.java:62)
-	at nachos.machine.TCB.threadroot(TCB.java:246)
-	at nachos.machine.TCB.start(TCB.java:129)
-	at nachos.machine.Machine.main(Machine.java:60)
+success
 stty: standard input: Inappropriate ioctl for device
 --[ JOIN - before thread finishes ]--
 stty: standard input: Inappropriate ioctl for device
