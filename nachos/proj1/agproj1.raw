@@ -1,22 +1,10 @@
-------[ Wed Oct 25 20:00:24 2017 ]------
+------[ Wed Oct 25 22:00:36 2017 ]------
 --[ CV2 - N sleepers, N wakers ]--
 stty: standard input: Inappropriate ioctl for device
 stty: standard input: Inappropriate ioctl for device
 nachos 5.0j initializing... config interrupt timer elevators user-check grader
 
-nachos.machine.AssertionFailureError: your implementation is incorrect
-	at nachos.machine.Lib.assertTrue(Lib.java:89)
-	at nachos.ag.ThreadGrader1.lcheck(ThreadGrader1.java:117)
-	at nachos.ag.ThreadGrader1.testA(ThreadGrader1.java:216)
-	at nachos.ag.ThreadGrader1.access$000(ThreadGrader1.java:14)
-	at nachos.ag.ThreadGrader1$1.run(ThreadGrader1.java:158)
-	at nachos.threads.KThread.runThread(KThread.java:170)
-	at nachos.threads.KThread.access$000(KThread.java:41)
-	at nachos.threads.KThread$1.run(KThread.java:159)
-	at nachos.machine.TCB.threadroot(TCB.java:246)
-	at nachos.machine.TCB.access$100(TCB.java:25)
-	at nachos.machine.TCB$1.run(TCB.java:99)
-	at java.lang.Thread.run(Thread.java:745)
+success
 stty: standard input: Inappropriate ioctl for device
 --[ COMM - 1 message, 1 speak, 1 listen ]--
 stty: standard input: Inappropriate ioctl for device
