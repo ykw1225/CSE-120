@@ -53,6 +53,9 @@ public class Communicator {
                 KThread.yield();
                 lock.acquire();
             }
+
+	    System.out.println( KThread.currentThread().getName() + " is speaking-----");
+
             finished = false;
             message = word;
             condition_listen.wake();
@@ -66,6 +69,9 @@ public class Communicator {
                 KThread.yield();
                 lock.acquire();
             }
+
+	    System.out.println( KThread.currentThread().getName() + " is speaking-----");
+
             finished = false;
             message = word;
             condition_return_listen.wake();
@@ -88,11 +94,13 @@ public class Communicator {
             condition_speaker.wake();
             num_speaker--;
             condition_return_listen.sleep();
+	    System.out.println( KThread.currentThread().getName() + " is listening----");
             finished = true;
         }
         else{
             num_listen++;
             condition_listen.sleep();
+	    System.out.println( KThread.currentThread().getName() + " is listening----");
             finished = true;
         }
         lock.release();
@@ -109,8 +117,8 @@ public class Communicator {
     
     public static void commTest6() {
     final Communicator com = new Communicator();
-    final long times[] = new long[4];
-    final int words[] = new int[2];
+    final long times[] = new long[20];
+    final int words[] = new int[20];
     KThread speaker1 = new KThread( new Runnable () {
         public void run() {
             com.speak(4);
@@ -139,6 +147,78 @@ public class Communicator {
         }
         });
     listener2.setName("L2");
+
+    //new tests
+    KThread speaker3 = new KThread( new Runnable () {
+        public void run() {
+            com.speak(1);
+            times[4] = Machine.timer().getTime();
+        }
+        });
+    speaker3.setName("S3");
+
+
+    KThread speaker4 = new KThread( new Runnable () {
+        public void run() {
+            com.speak(2);
+            times[5] = Machine.timer().getTime();
+        }
+        });
+    speaker4.setName("S4");
+
+    KThread speaker5 = new KThread( new Runnable () {
+        public void run() {
+            com.speak(3);
+            times[6] = Machine.timer().getTime();
+        }
+        });
+    speaker5.setName("S5");
+
+
+
+    KThread listener3 = new KThread( new Runnable () {
+        public void run() {
+            times[7] = Machine.timer().getTime();
+            words[2] = com.listen();
+        }
+        });
+    listener3.setName("L3");
+
+    KThread listener4 = new KThread( new Runnable () {
+        public void run() {
+            times[8] = Machine.timer().getTime();
+            words[3] = com.listen();
+        }
+        });
+    listener4.setName("L4");
+
+    KThread speaker6 = new KThread( new Runnable () {
+        public void run() {
+            com.speak(4);
+            times[9] = Machine.timer().getTime();
+        }
+        });
+    speaker6.setName("S6");
+
+
+    KThread listener5 = new KThread( new Runnable () {
+        public void run() {
+            times[10] = Machine.timer().getTime();
+            words[4] = com.listen();
+        }
+        });
+    listener5.setName("L5");
+
+    KThread listener6 = new KThread( new Runnable () {
+        public void run() {
+            times[11] = Machine.timer().getTime();
+            words[5] = com.listen();
+        }
+        });
+    listener6.setName("L6");
+
+
+
     
     speaker1.fork(); speaker2.fork(); listener1.fork(); listener2.fork();
     speaker1.join(); speaker2.join(); listener1.join(); listener2.join();
@@ -148,6 +228,19 @@ public class Communicator {
     Lib.assertTrue(times[0] > times[2], "speak() returned before listen() called.");
     Lib.assertTrue(times[1] > times[3], "speak() returned before listen() called.");
     System.out.println("commTest6 successful!");
+
+    System.out.println("----------Additional Communicator Tests-------------");
+    speaker3.fork(); speaker4.fork(); speaker5.fork(); listener3.fork(); listener4.fork(); speaker6.fork(); listener5.fork(); listener6.fork();
+    speaker3.join(); speaker4.join(); speaker5.join(); speaker6.join(); listener3.join(); listener4.join(); listener5.join(); listener6.join();
+
+    System.out.println(words[2]);
+    System.out.println(words[3]);
+    System.out.println(words[4]);
+    System.out.println(words[5]);
+
+    System.out.println("-----------All Communicator Tests Done-------------");
+
+
     }
 
     // Invoke Communicator.selfTest() from ThreadedKernel.selfTest()
@@ -158,5 +251,6 @@ public class Communicator {
     commTest6();
     }
 }
+
 
 

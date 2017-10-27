@@ -463,10 +463,16 @@ public class KThread {
     public static void selfTest() {
         Lib.debug(dbgThread, "Enter KThread.selfTest");
 
+	System.out.println("--------------Start Join tests----------");
+
         new KThread(new PingTest(1)).setName("forked thread").fork();
         new PingTest(0).run();
         joinTest1();
 	joinTest2();
+	
+	System.out.println("---------All Join tests done------------");
+	System.out.println("");
+	System.out.println("");
     }
 
     private static final char dbgThread = 't';

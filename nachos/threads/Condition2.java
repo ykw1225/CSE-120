@@ -127,8 +127,16 @@ public class Condition2 {
     // Invoke Condition2.selfTest() from ThreadedKernel.selfTest()
 
     public static void selfTest() {
+
+    System.out.println("--------------Start Condition2 Tests----------------");
+
         new InterlockTest();
         cvTest5();
+    System.out.println("------------All Condition2 Tests Done---------------");
+
+    System.out.println("");
+    System.out.println("");
+
     }
     // Place Condition2 test code inside of the Condition2 class.
 
