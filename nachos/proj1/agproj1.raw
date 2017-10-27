@@ -1,29 +1,17 @@
-------[ Wed Oct 25 22:00:36 2017 ]------
+------[ Fri Oct 27 11:06:27 2017 ]------
 --[ CV2 - N sleepers, N wakers ]--
-stty: standard input: Inappropriate ioctl for device
-stty: standard input: Inappropriate ioctl for device
 nachos 5.0j initializing... config interrupt timer elevators user-check grader
 
 success
-stty: standard input: Inappropriate ioctl for device
 --[ COMM - 1 message, 1 speak, 1 listen ]--
-stty: standard input: Inappropriate ioctl for device
-stty: standard input: Inappropriate ioctl for device
 nachos 5.0j initializing... config interrupt timer elevators user-check grader
 
 success
-stty: standard input: Inappropriate ioctl for device
 --[ JOIN - before thread finishes ]--
-stty: standard input: Inappropriate ioctl for device
-stty: standard input: Inappropriate ioctl for device
 nachos 5.0j initializing... config interrupt timer elevators user-check grader
 
 success
-stty: standard input: Inappropriate ioctl for device
 --[ ALARM - Tests waitUntil to ensure it waits at least minimum amount of time ]--
-stty: standard input: Inappropriate ioctl for device
-stty: standard input: Inappropriate ioctl for device
 nachos 5.0j initializing... config interrupt timer elevators user-check grader
 
 success
-stty: standard input: Inappropriate ioctl for device
