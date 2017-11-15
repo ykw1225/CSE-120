@@ -372,7 +372,7 @@ public class UserProcess {
 	}
 
         private int handleCreate(int name){
-          String filename = readVirtualMemoryString(name, 255);
+          String filename = readVirtualMemoryString(name, 256);
           boolean create = true;
           for(int i = 0; i < 16; i++){
             if(fileTable[i] == null){
@@ -499,7 +499,7 @@ public class UserProcess {
              }
              else{
                int readByte = readVirtualMemory(buffer + counter, local_buffer, 0, count - counter);
-               if(readByte < (counter - count)){
+               if(readByte < (count - counter)){
                  return -1;
                }
                int writeByte = fileTable[fd].write(counter, local_buffer, 0, readByte);
