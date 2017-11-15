@@ -1,0 +1,323 @@
+------[ Thu Nov  2 16:56:36 2017 ]------
+--[ CV2 - Test if sleep has acquired the lock ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+Enter UCSDCondition2Grader.sleepWithoutLockTest
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ CV2 - Test if wake has acquired the lock ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+Enter UCSDCondition2Grader.wakeWithoutLockTest
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ CV2 - Test if wakeAll has acquired the lock ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+Enter UCSDCondition2Grader.wakeAllWithoutLockTest
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ CV2 - Test if sleep() sleeps until someone wakes it up ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+Enter UCSDCondition2Grader.sleepTest
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ CV2 - Test if wake() wakes exactly one sleeping thread ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+Enter UCSDCondition2Grader.wakeTest
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ CV2 - Test if wakeAll() wakes all the sleeping threads ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+Enter UCSDCondition2Grader.wakeAllTest
+Wakeups: 3
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ CV2 - Test if wake has no effect when there is no thread sleeping ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+Enter UCSDCondition2Grader.wakeNoEffectTest
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ CV2 - Test if wakeAll has no effect when there is no thread sleeping ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+Enter UCSDCondition2Grader.wakeAllNoEffectTest
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ COMM - many messages, many speak, many listen ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+jfork is speaking-----
+jfork is listening----
+jfork is speaking-----
+jfork is listening----
+jfork is speaking-----
+jfork is listening----
+jfork is speaking-----
+jfork is listening----
+jfork is speaking-----
+jfork is listening----
+jfork is speaking-----
+jfork is listening----
+jfork is speaking-----
+jfork is listening----
+jfork is speaking-----
+jfork is listening----
+jfork is speaking-----
+jfork is listening----
+jfork is speaking-----
+jfork is listening----
+jfork is speaking-----
+jfork is listening----
+jfork is speaking-----
+jfork is listening----
+jfork is speaking-----
+jfork is listening----
+jfork is speaking-----
+jfork is listening----
+jfork is speaking-----
+jfork is listening----
+jfork is speaking-----
+
+java.lang.ArrayIndexOutOfBoundsException: 20
+	at nachos.ag.ThreadGrader2.produce(ThreadGrader2.java:78)
+	at nachos.ag.ThreadGrader2.producer(ThreadGrader2.java:103)
+	at nachos.ag.ThreadGrader2$1.run(ThreadGrader2.java:48)
+	at nachos.threads.KThread.runThread(KThread.java:170)
+	at nachos.threads.KThread.access$000(KThread.java:41)
+	at nachos.threads.KThread$1.run(KThread.java:159)
+	at nachos.machine.TCB.threadroot(TCB.java:246)
+	at nachos.machine.TCB.access$100(TCB.java:25)
+	at nachos.machine.TCB$1.run(TCB.java:99)
+	at java.lang.Thread.run(Thread.java:748)
+stty: standard input: Inappropriate ioctl for device
+
+--[ COMM - Test if speaker blocks until listener has been called ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+Running UCSDCommGrader.speakerFirstTest
+S1 is speaking-----
+L1 is listening----
+UCSDCommGrader.speakerFirstTest successful!
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ COMM - Test if listener blocks until speaker is called ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+Running UCSDCommGrader.listenerFirstTest
+S1 is speaking-----
+L1 is listening----
+UCSDCommGrader.listenerFirstTest successful!
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ COMM - Test if words are listened in the same order they are spoken, when there are multiple threads ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+Running UCSDCommGrader.multipleSpeakersAndListenersTest.
+S1 is speaking-----
+L1 is listening----
+S2 is speaking-----
+L2 is listening----
+UCSDCommGrader.multipleSpeakersAndListenersTest successful!
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ COMM - Test if extra speakers block when they do not have corresponding listeners ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+Running UCSDCommGrader.extraSpeakersTest.
+S1 is speaking-----
+L1 is listening----
+UCSDCommGrader.extraSpeakersTest successful!
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ COMM - Test if extra listeners block when they do not have corresponding speakers ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+Running UCSDCommGrader.extraListenersTest.
+S1 is speaking-----
+L1 is listening----
+UCSDCommGrader.extraListenersTest successful!
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ COMM - Test if multiple communicators do not interact with each other ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+Running UCSDCommGrader.multipleCommunicatorsTest.
+S1 is speaking-----
+S2 is speaking-----
+L1 is listening----
+L2 is listening----
+UCSDCommGrader.multipleCommunicatorsTest successful!
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ JOIN - Test join() after child had finished. ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+busy...
+I (heart) Nachos!
+busy...
+busy...
+busy...
+busy...
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ JOIN - Test join() before child finishes ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+I (heart) Nachos!
+I (heart) Nachos!
+I (heart) Nachos!
+I (heart) Nachos!
+I (heart) Nachos!
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ JOIN - Test join() on different childs right after spawn, one by one ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ JOIN - Test join() on different childs; all children are spawned first, then joined one by one. ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ JOIN - Test differnt threads join different other threads. ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ JOIN - Test joining same thread multiple times should be an error. ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+
+nachos.machine.AssertionFailureError: parent was able to join to child twice
+	at nachos.machine.Lib.assertTrue(Lib.java:89)
+	at nachos.ag.UCSDJoinGrader.error1(UCSDJoinGrader.java:135)
+	at nachos.ag.UCSDJoinGrader.run(UCSDJoinGrader.java:166)
+	at nachos.ag.AutoGrader.start(AutoGrader.java:47)
+	at nachos.machine.Machine$1.run(Machine.java:62)
+	at nachos.machine.TCB.threadroot(TCB.java:246)
+	at nachos.machine.TCB.start(TCB.java:129)
+	at nachos.machine.Machine.main(Machine.java:60)
+stty: standard input: Inappropriate ioctl for device
+
+--[ JOIN - Test joining oneself should be an error. ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+Exception caught: null
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ ALARM - Tests waitUntil to ensure it waits at least minimum amount of time ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ ALARM - Tests whether waitUntil actually wakes up at correct time ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ ALARM - Test if waking up threads in proper order - not necessarily sleep order ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ ALARM - Test if thds are waken up at proper time ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ ALARM - Tests proper handling of negative wait times. ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+
+success
+stty: standard input: Inappropriate ioctl for device
+
+--[ ALARM - Tests if mistakenly waking all the threads ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer elevators user-check grader
+
+success
+stty: standard input: Inappropriate ioctl for device
+
