@@ -372,7 +372,7 @@ public class UserProcess {
 	}
 
         private int handleCreate(int name){
-          String filename = readVirtualMemoryString(name, Integer.MAX_VALUE - 1);
+          String filename = readVirtualMemoryString(name, 256);
           boolean create = true;
           for(int i = 0; i < 16; i++){
             if(fileTable[i] == null){
@@ -411,7 +411,7 @@ public class UserProcess {
         }
  
         private int handleOpen(int name){
-          String filename = readVirtualMemoryString(name, Integer.MAX_VALUE - 1);
+          String filename = readVirtualMemoryString(name, 256);
           OpenFile f = ThreadedKernel.fileSystem.open(filename, false);
           if(f != null){
             int fd = -1;
@@ -527,7 +527,7 @@ public class UserProcess {
         }
 
         private int handleUnlink(int name){
-          String filename = readVirtualMemoryString(name, Integer.MAX_VALUE - 1);
+          String filename = readVirtualMemoryString(name, 256);
           for(int i = 0; i < 16; i++){
             if(fileTable[i] == null){
               continue;
