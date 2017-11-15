@@ -26,6 +26,11 @@ public class UserProcess {
 	public UserProcess() {
 		int numPhysPages = Machine.processor().getNumPhysPages();
 		pageTable = new TranslationEntry[numPhysPages];
+                fileTable[0] = UserKernel.console.openForReading();
+                fileTable[1] = UserKernel.console.openForWriting();
+                for(int i = 2; i < 16.; i++){
+                  fileTable[i] = null;
+                }
 		for (int i = 0; i < numPhysPages; i++)
 			pageTable[i] = new TranslationEntry(i, i, true, false, false, false);
 	}
@@ -366,6 +371,159 @@ public class UserProcess {
 		return 0;
 	}
 
+        private int handleCreate(int name){
+          String filename = readVirtualMemoryString(name, Integer.MAX_VALUE - 1);
+          boolean create = true;
+          for(int i = 0; i < 16; i++){
+            if(fileTable[i] == null){
+              continue;
+            }
+            if(filename.equals(fileTable[i].getName())){
+              create = false;
+            }
+          }
+          OpenFile f = ThreadedKernel.fileSystem.open(filename, create);
+          if(f != null && create == true){
+            int fd = -1;
+            for(int i = 0; i < 16; i++){
+              if(fileTable[i] == null){
+                fileTable[i] = f;
+                fd = i;
+              }
+            }
+            return fd;
+          }
+          else if(f != null && create == false){
+            int fd = -1;
+            for(int i = 0; i < 16; i++){
+              if(fileTable[i] == null){
+                continue;
+              }
+              if(filename.equals(fileTable[i].getName())){
+                fd = i;
+              }
+            }
+            return fd;
+          }
+          else{
+            return -1;
+          }
+        }
+ 
+        private int handleOpen(int name){
+          String filename = readVirtualMemoryString(name, Integer.MAX_VALUE - 1);
+          OpenFile f = ThreadedKernel.fileSystem.open(filename, false);
+          if(f != null){
+            int fd = -1;
+            for(int i = 0; i < 16; i++){
+              if(fileTable[i] == null){
+                continue;
+              }
+              if(filename.equals(fileTable[i].getName())){
+                fd = i;
+              }
+            }
+            return fd;
+          }
+          else{
+            return -1;
+          }
+        }
+ 
+        private int handleRead(int fd, int buffer, int count){
+          if(fd < 0 || fd > 15 || buffer < 0 || fileTable[fd] == null || fd == 1 || count < 0 || (count + buffer) > Machine.processor().getMemory().length){
+            return -1; // count + buffer???
+          } 
+          byte[] local_buffer = new byte[1024];
+          if(fd == 0){ // this is the stream // ?????? stream???
+            if(fileTable[fd].read(0, local_buffer, 0, 1024) == -1){
+              return -1;
+            }
+            else{
+              return writeVirtualMemory(buffer, local_buffer);
+            }
+          }
+          int counter = 0;
+          while(counter < count){
+            if((count - counter) >= 1024){
+              int readByte = 0;
+              if((readByte = fileTable[fd].read(counter, local_buffer, 0, 1024)) == -1){ // if file is multiple of 1024?
+                return -1;
+              }
+              else{
+                if(readByte < 1024){ // if file is multiple of 1024?????
+                  byte[] offset_buffer = new byte[readByte];
+                  for(int i = 0; i < readByte; i++){
+                    offset_buffer[i] = local_buffer[i];
+                  }
+                  counter += writeVirtualMemory(buffer + counter, offset_buffer);
+                  return counter;
+                }
+                int writeByte = writeVirtualMemory(buffer + counter, local_buffer); // out of memeory???
+                counter += writeByte;
+                if(readByte == 1024 && writeByte < 1024){
+                  return counter;
+                }
+                // counter +1 run again?
+              }
+            }
+            else{
+              int readByte = 0;
+              if((readByte = fileTable[fd].read(counter, local_buffer, 0, (count - counter))) == -1){
+                return -1;
+              }
+              else{
+                byte[] offset_buffer = new byte[readByte];
+
+                for(int i = 0; i < offset_buffer.length; i++){
+                  offset_buffer[i] = local_buffer[i];
+                }
+
+                counter += writeVirtualMemory(buffer + counter, offset_buffer);
+                return counter;
+              }
+            }
+          }
+          return counter; // if counter == count
+        }
+
+        private int handleWrite(int fd, int buffer, int count){ 
+           return -1;
+        }
+
+        private int handleClose(int fileDescriptor){
+          if(fileDescriptor < 0 || fileDescriptor > 15 || fileTable[fileDescriptor] == null){
+            return -1;
+          }
+          fileTable[fileDescriptor].close();  // catch exception???????
+          fileTable[fileDescriptor] = null;
+          return 0;
+        }
+
+        private int handleUnlink(int name){
+          String filename = readVirtualMemoryString(name, Integer.MAX_VALUE - 1);
+          for(int i = 0; i < 16; i++){
+            if(fileTable[i] == null){
+              continue;
+            }
+            if(filename.equals(fileTable[i].getName())){
+              if(handleClose(i) == -1){
+                return -1;
+              }
+            }   // while loop to check???? synchronization??? condition variable????
+          }
+
+          //owever, creat() and open() will not be able to
+          //return new file descriptors for the file until it is deleted.
+          if(ThreadedKernel.fileSystem.remove(filename)){
+            return 0;
+          }
+          else{
+            return -1;
+          }
+        }
+
+
 	private static final int syscallHalt = 0, syscallExit = 1, syscallExec = 2,
 			syscallJoin = 3, syscallCreate = 4, syscallOpen = 5,
 			syscallRead = 6, syscallWrite = 7, syscallClose = 8,
@@ -438,7 +596,18 @@ public class UserProcess {
 			return handleHalt();
 		case syscallExit:
 			return handleExit(a0);
-
+                case syscallCreate:
+			return handleCreate(a0);
+                case syscallOpen:
+			return handleOpen(a0);
+                case syscallRead:
+			return handleRead(a0, a1, a2);
+                case syscallWrite:
+			return handleWrite(a0, a1, a2);
+                case syscallClose:
+			return handleClose(a0);
+                case syscallUnlink:
+			return handleUnlink(a0);
 		default:
 			Lib.debug(dbgProcess, "Unknown syscall " + syscall);
 			Lib.assertNotReached("Unknown system call!");
@@ -493,4 +662,8 @@ public class UserProcess {
 	private static final int pageSize = Processor.pageSize;
 
 	private static final char dbgProcess = 'a';
+
+        private OpenFile[] fileTable = new OpenFile[16];
+
+
 }
