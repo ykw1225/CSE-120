@@ -439,7 +439,13 @@ public class UserProcess {
           while(counter < count){
             if((count - counter) >= 1024){
               int readByte = 0;
-              if((readByte = fileTable[fd].read(counter, local_buffer, 0, 1024)) == -1){ // if file is multiple of 1024?
+              if(fd == 0){
+                readByte = fileTable[fd].read(local_buffer, 0, 1024);
+              }
+              else{
+                readByte = fileTable[fd].read(counter, local_buffer, 0, 1024);
+              }
+              if(readByte == -1){ // if file is multiple of 1024?
                 return -1;
               }
               else{
@@ -461,7 +467,13 @@ public class UserProcess {
             }
             else{
               int readByte = 0;
-              if((readByte = fileTable[fd].read(counter, local_buffer, 0, (count - counter))) == -1){
+              if(fd == 0){
+                readByte = fileTable[fd].read(local_buffer, 0, (count - counter));
+              }
+              else{
+                readByte = fileTable[fd].read(counter, local_buffer, 0, (count - counter));
+              }
+              if(readByte == -1){
                 return -1;
               }
               else{
@@ -491,7 +503,13 @@ public class UserProcess {
                if(readByte < 1024){
                  return -1; // out of memory?
                }
-               int writeByte = fileTable[fd].write(counter, local_buffer, 0, readByte);
+               int writeByte = 0;
+               if(fd == 1){
+                 writeByte = fileTable[fd].write(local_buffer, 0, readByte);
+               }
+               else{
+                 writeByte = fileTable[fd].write(counter, local_buffer, 0, readByte);
+               }
                if(writeByte == -1){
                  return -1; // disk full or stream terminate
                }
@@ -499,20 +517,34 @@ public class UserProcess {
              }
              else{
                int readByte = readVirtualMemory(buffer + counter, local_buffer, 0, count - counter);
+//System.out.println("readByte: " + readByte);
+//System.out.println("count - counter :" + (count - counter));
+//System.out.println("count: "+count);
+//System.out.println("counter:" + counter);
                if(readByte < (count - counter)){
                  return -1;
                }
-               int writeByte = fileTable[fd].write(counter, local_buffer, 0, readByte);
+               int writeByte = 0;
+               if(fd == 1){
+                 writeByte = fileTable[fd].write(local_buffer, 0, readByte);
+               }
+               else{
+                 writeByte = fileTable[fd].write(counter, local_buffer, 0, readByte);
+               }
                if(writeByte == -1){
                  return -1;
                }
                counter += writeByte;
+//System.out.println(counter + "caonima");
              }
            }
+//System.out.println("break out the loop");
            if(counter < count){
+//System.out.println("incorrect return");
              return -1;
            }
            else{
+//System.out.println("correct return");
              return counter;
            }
         }
