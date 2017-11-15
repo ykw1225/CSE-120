@@ -1,41 +1,42 @@
-------[ Wed Nov 15 03:30:32 2017 ]------
+------[ Wed Nov 15 13:30:36 2017 ]------
 --[ tests write1.c ]--
 stty: standard input: Inappropriate ioctl for device
 stty: standard input: Inappropriate ioctl for device
 nachos 5.0j initializing... config interrupt timer processor console user-check grader
 
-nachos.machine.AssertionFailureError: ExitGrader: expected exit status of 0, but program actually exited with -1
-	at nachos.machine.Lib.assertTrue(Lib.java:89)
-	at nachos.ag.UCSDExitGrader.finishingCurrentProcess(UCSDExitGrader.java:26)
-	at nachos.userprog.UserProcess.handleExit(UserProcess.java:369)
-	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:624)
-	at nachos.userprog.UserProcess.handleException(UserProcess.java:656)
-	at nachos.userprog.UserKernel.exceptionHandler(UserKernel.java:83)
-	at nachos.userprog.UserKernel$1.run(UserKernel.java:29)
-	at nachos.machine.Processor$MipsException.handle(Processor.java:619)
-	at nachos.machine.Processor.run(Processor.java:101)
-	at nachos.userprog.UThread.runProgram(UThread.java:31)
-	at nachos.userprog.UThread.access$000(UThread.java:11)
-	at nachos.userprog.UThread$1.run(UThread.java:20)
-	at nachos.threads.KThread.runThread(KThread.java:170)
-	at nachos.threads.KThread.access$000(KThread.java:41)
-	at nachos.threads.KThread$1.run(KThread.java:159)
-	at nachos.machine.TCB.threadroot(TCB.java:246)
-	at nachos.machine.TCB.access$100(TCB.java:25)
-	at nachos.machine.TCB$1.run(TCB.java:99)
-	at java.lang.Thread.run(Thread.java:745)
+roses are red
+violets are blue
+I love Nachos
+and so do you
+
+
+success
 stty: standard input: Inappropriate ioctl for device
 --[ tests write10.c ]--
 stty: standard input: Inappropriate ioctl for device
 stty: standard input: Inappropriate ioctl for device
 nachos 5.0j initializing... config interrupt timer processor console user-check grader
+creating write.out...
+...passed (fd = 15)
+writing 59 bytes to file, 59 bytes at a time...
+...passed (wrote 59 bytes)
+closing 15...
+opening write.out...
+...passed (fd = 14)
+reading write.out into buffer...
+...failed (r = -1)
+closing 14...
+creating write.out...
+...passed (fd = 13)
+writing 59 bytes to file, 8 bytes at a time...
+...failed (r = -1)
 
 nachos.machine.AssertionFailureError: ExitGrader: expected exit status of 0, but program actually exited with -1004
 	at nachos.machine.Lib.assertTrue(Lib.java:89)
 	at nachos.ag.UCSDExitGrader.finishingCurrentProcess(UCSDExitGrader.java:26)
 	at nachos.userprog.UserProcess.handleExit(UserProcess.java:369)
-	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:624)
-	at nachos.userprog.UserProcess.handleException(UserProcess.java:656)
+	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:656)
+	at nachos.userprog.UserProcess.handleException(UserProcess.java:688)
 	at nachos.userprog.UserKernel.exceptionHandler(UserKernel.java:83)
 	at nachos.userprog.UserKernel$1.run(UserKernel.java:29)
 	at nachos.machine.Processor$MipsException.handle(Processor.java:619)
@@ -66,8 +67,8 @@ nachos 5.0j initializing... config interrupt timer processor console user-check 
 nachos.machine.AssertionFailureError: Unknown system call!
 	at nachos.machine.Lib.assertTrue(Lib.java:89)
 	at nachos.machine.Lib.assertNotReached(Lib.java:106)
-	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:639)
-	at nachos.userprog.UserProcess.handleException(UserProcess.java:656)
+	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:671)
+	at nachos.userprog.UserProcess.handleException(UserProcess.java:688)
 	at nachos.userprog.UserKernel.exceptionHandler(UserKernel.java:83)
 	at nachos.userprog.UserKernel$1.run(UserKernel.java:29)
 	at nachos.machine.Processor$MipsException.handle(Processor.java:619)
@@ -87,12 +88,13 @@ stty: standard input: Inappropriate ioctl for device
 stty: standard input: Inappropriate ioctl for device
 stty: standard input: Inappropriate ioctl for device
 nachos 5.0j initializing... config interrupt timer processor console user-check grader
+execing exit1.coff...
 
 nachos.machine.AssertionFailureError: Unknown system call!
 	at nachos.machine.Lib.assertTrue(Lib.java:89)
 	at nachos.machine.Lib.assertNotReached(Lib.java:106)
-	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:639)
-	at nachos.userprog.UserProcess.handleException(UserProcess.java:656)
+	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:671)
+	at nachos.userprog.UserProcess.handleException(UserProcess.java:688)
 	at nachos.userprog.UserKernel.exceptionHandler(UserKernel.java:83)
 	at nachos.userprog.UserKernel$1.run(UserKernel.java:29)
 	at nachos.machine.Processor$MipsException.handle(Processor.java:619)
