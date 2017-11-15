@@ -435,14 +435,6 @@ public class UserProcess {
             return -1; // count + buffer???
           } 
           byte[] local_buffer = new byte[1024];
-          if(fd == 0){ // this is the stream // ?????? stream???
-            if(fileTable[fd].read(0, local_buffer, 0, 1024) == -1){
-              return -1;
-            }
-            else{
-              return writeVirtualMemory(buffer, local_buffer);
-            }
-          }
           int counter = 0;
           while(counter < count){
             if((count - counter) >= 1024){
@@ -488,7 +480,41 @@ public class UserProcess {
         }
 
         private int handleWrite(int fd, int buffer, int count){ 
-           return -1;
+           if(fd < 0 || fd > 15 || buffer < 0 || fileTable[fd] == null || fd == 0 || count < 0 || (count + buffer) > Machine.processor().getMemory().length){
+             return -1;
+           }
+           byte [] local_buffer = new byte[1024];
+           int counter = 0;
+           while(counter < count){
+             if((count - counter) >= 1024){
+               int readByte = readVirtualMemory(buffer + counter, local_buffer, 0, 1024);
+               if(readByte < 1024){
+                 return -1; // out of memory?
+               }
+               int writeByte = fileTable[fd].write(counter, local_buffer, 0, readByte);
+               if(writeByte == -1){
+                 return -1; // disk full or stream terminate
+               }
+               counter += writeByte;
+             }
+             else{
+               int readByte = readVirtualMemory(buffer + counter, local_buffer, 0, count - counter);
+               if(readByte < (counter - count)){
+                 return -1;
+               }
+               int writeByte = fileTable[fd].write(counter, local_buffer, 0, readByte);
+               if(writeByte == -1){
+                 return -1;
+               }
+               counter += writeByte;
+             }
+           }
+           if(counter < count){
+             return -1;
+           }
+           else{
+             return counter;
+           }
         }
 
         private int handleClose(int fileDescriptor){
