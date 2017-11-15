@@ -372,7 +372,7 @@ public class UserProcess {
 	}
 
         private int handleCreate(int name){
-          String filename = readVirtualMemoryString(name, 256);
+          String filename = readVirtualMemoryString(name, 255);
           boolean create = true;
           for(int i = 0; i < 16; i++){
             if(fileTable[i] == null){
