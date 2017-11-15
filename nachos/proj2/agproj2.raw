@@ -1,4 +1,4 @@
-------[ Tue Nov 14 23:30:39 2017 ]------
+------[ Wed Nov 15 02:00:25 2017 ]------
 --[ tests write1.c ]--
 stty: standard input: Inappropriate ioctl for device
 stty: standard input: Inappropriate ioctl for device
@@ -8,8 +8,8 @@ nachos.machine.AssertionFailureError: ExitGrader: expected exit status of 0, but
 	at nachos.machine.Lib.assertTrue(Lib.java:89)
 	at nachos.ag.UCSDExitGrader.finishingCurrentProcess(UCSDExitGrader.java:26)
 	at nachos.userprog.UserProcess.handleExit(UserProcess.java:369)
-	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:598)
-	at nachos.userprog.UserProcess.handleException(UserProcess.java:630)
+	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:624)
+	at nachos.userprog.UserProcess.handleException(UserProcess.java:656)
 	at nachos.userprog.UserKernel.exceptionHandler(UserKernel.java:83)
 	at nachos.userprog.UserKernel$1.run(UserKernel.java:29)
 	at nachos.machine.Processor$MipsException.handle(Processor.java:619)
@@ -33,8 +33,8 @@ nachos 5.0j initializing... config interrupt timer processor console user-check 
 java.lang.OutOfMemoryError: Requested array size exceeds VM limit
 	at nachos.userprog.UserProcess.readVirtualMemoryString(UserProcess.java:110)
 	at nachos.userprog.UserProcess.handleCreate(UserProcess.java:375)
-	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:600)
-	at nachos.userprog.UserProcess.handleException(UserProcess.java:630)
+	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:626)
+	at nachos.userprog.UserProcess.handleException(UserProcess.java:656)
 	at nachos.userprog.UserKernel.exceptionHandler(UserKernel.java:83)
 	at nachos.userprog.UserKernel$1.run(UserKernel.java:29)
 	at nachos.machine.Processor$MipsException.handle(Processor.java:619)
@@ -65,8 +65,8 @@ nachos 5.0j initializing... config interrupt timer processor console user-check 
 nachos.machine.AssertionFailureError: Unknown system call!
 	at nachos.machine.Lib.assertTrue(Lib.java:89)
 	at nachos.machine.Lib.assertNotReached(Lib.java:106)
-	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:613)
-	at nachos.userprog.UserProcess.handleException(UserProcess.java:630)
+	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:639)
+	at nachos.userprog.UserProcess.handleException(UserProcess.java:656)
 	at nachos.userprog.UserKernel.exceptionHandler(UserKernel.java:83)
 	at nachos.userprog.UserKernel$1.run(UserKernel.java:29)
 	at nachos.machine.Processor$MipsException.handle(Processor.java:619)
@@ -90,8 +90,8 @@ nachos 5.0j initializing... config interrupt timer processor console user-check 
 nachos.machine.AssertionFailureError: Unknown system call!
 	at nachos.machine.Lib.assertTrue(Lib.java:89)
 	at nachos.machine.Lib.assertNotReached(Lib.java:106)
-	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:613)
-	at nachos.userprog.UserProcess.handleException(UserProcess.java:630)
+	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:639)
+	at nachos.userprog.UserProcess.handleException(UserProcess.java:656)
 	at nachos.userprog.UserKernel.exceptionHandler(UserKernel.java:83)
 	at nachos.userprog.UserKernel$1.run(UserKernel.java:29)
 	at nachos.machine.Processor$MipsException.handle(Processor.java:619)
