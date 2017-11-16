@@ -11,11 +11,11 @@ import java.io.EOFException;
  * Encapsulates the state of a user process that is not contained in its user
  * thread (or threads). This includes its address translation state, a file
  * table, and information about the program being executed.
- * 
+ *
  * <p>
  * This class is extended by other classes to support additional functionality
  * (such as additional syscalls).
- * 
+ *
  * @see nachos.vm.VMProcess
  * @see nachos.network.NetProcess
  */
@@ -26,20 +26,28 @@ public class UserProcess {
 	public UserProcess() {
 		int numPhysPages = Machine.processor().getNumPhysPages();
 		pageTable = new TranslationEntry[numPhysPages];
-                fileTable[0] = UserKernel.console.openForReading();
-                fileTable[1] = UserKernel.console.openForWriting();
-                for(int i = 2; i < 16.; i++){
-                  fileTable[i] = null;
-                }
 		for (int i = 0; i < numPhysPages; i++)
 			pageTable[i] = new TranslationEntry(i, i, true, false, false, false);
+		
+/////////////////////////////////////////////////////////////////////////////////////////
+
+		// initialize the file table
+		fileTable = new OpenFile[MAXFPP];
+		fileTable[0] = UserKernel.console.openForReading();
+		fileTable[1] = UserKernel.console.openForWriting();
+		for(int i=2; i < MAXFPP; i++) fileTable[i] = null;
+		
+		// initialize files counter
+		numFile = 2;
+		
+/////////////////////////////////////////////////////////////////////////////////////////
 	}
 
 	/**
 	 * Allocate and return a new process of the correct class. The class name is
 	 * specified by the <tt>nachos.conf</tt> key
 	 * <tt>Kernel.processClassName</tt>.
-	 * 
+	 *
 	 * @return a new process of the correct class.
 	 */
 	public static UserProcess newUserProcess() {
@@ -62,7 +70,7 @@ public class UserProcess {
 	/**
 	 * Execute the specified program with the specified arguments. Attempts to
 	 * load the program, and then forks a thread to run it.
-	 * 
+	 *
 	 * @param name the name of the file containing the executable.
 	 * @param args the arguments to pass to the executable.
 	 * @return <tt>true</tt> if the program was successfully executed.
@@ -97,7 +105,7 @@ public class UserProcess {
 	 * the null terminator, and convert it to a <tt>java.lang.String</tt>,
 	 * without including the null terminator. If no null terminator is found,
 	 * returns <tt>null</tt>.
-	 * 
+	 *
 	 * @param vaddr the starting virtual address of the null-terminated string.
 	 * @param maxLength the maximum number of characters in the string, not
 	 * including the null terminator.
@@ -122,7 +130,7 @@ public class UserProcess {
 	/**
 	 * Transfer data from this process's virtual memory to all of the specified
 	 * array. Same as <tt>readVirtualMemory(vaddr, data, 0, data.length)</tt>.
-	 * 
+	 *
 	 * @param vaddr the first byte of virtual memory to read.
 	 * @param data the array where the data will be stored.
 	 * @return the number of bytes successfully transferred.
@@ -137,7 +145,7 @@ public class UserProcess {
 	 * <i>not</i> destroy the current process if an error occurs, but instead
 	 * should return the number of bytes successfully copied (or zero if no data
 	 * could be copied).
-	 * 
+	 *
 	 * @param vaddr the first byte of virtual memory to read.
 	 * @param data the array where the data will be stored.
 	 * @param offset the first byte to write in the array.
@@ -164,7 +172,7 @@ public class UserProcess {
 	/**
 	 * Transfer all data from the specified array to this process's virtual
 	 * memory. Same as <tt>writeVirtualMemory(vaddr, data, 0, data.length)</tt>.
-	 * 
+	 *
 	 * @param vaddr the first byte of virtual memory to write.
 	 * @param data the array containing the data to transfer.
 	 * @return the number of bytes successfully transferred.
@@ -179,7 +187,7 @@ public class UserProcess {
 	 * <i>not</i> destroy the current process if an error occurs, but instead
 	 * should return the number of bytes successfully copied (or zero if no data
 	 * could be copied).
-	 * 
+	 *
 	 * @param vaddr the first byte of virtual memory to write.
 	 * @param data the array containing the data to transfer.
 	 * @param offset the first byte to transfer from the array.
@@ -208,7 +216,7 @@ public class UserProcess {
 	 * prepare to pass it the specified arguments. Opens the executable, reads
 	 * its header information, and copies sections and arguments into this
 	 * process's virtual memory.
-	 * 
+	 *
 	 * @param name the name of the file containing the executable.
 	 * @param args the arguments to pass to the executable.
 	 * @return <tt>true</tt> if the executable was successfully loaded.
@@ -294,7 +302,7 @@ public class UserProcess {
 	 * Allocates memory for this process, and loads the COFF sections into
 	 * memory. If this returns successfully, the process will definitely be run
 	 * (this is the last step in process initialization that can fail).
-	 * 
+	 *
 	 * @return <tt>true</tt> if the sections were successfully loaded.
 	 */
 	protected boolean loadSections() {
@@ -371,217 +379,214 @@ public class UserProcess {
 		return 0;
 	}
 
-        private int handleCreate(int name){
-          String filename = readVirtualMemoryString(name, 256);
-          boolean create = true;
-          for(int i = 0; i < 16; i++){
-            if(fileTable[i] == null){
-              continue;
-            }
-            if(filename.equals(fileTable[i].getName())){
-              create = false;
-            }
-          }
-          OpenFile f = ThreadedKernel.fileSystem.open(filename, create);
-          if(f != null && create == true){
-            int fd = -1;
-            for(int i = 0; i < 16; i++){
-              if(fileTable[i] == null){
-                fileTable[i] = f;
-                fd = i;
-              }
-            }
-            return fd;
-          }
-          else if(f != null && create == false){
-            int fd = -1;
-            for(int i = 0; i < 16; i++){
-              if(fileTable[i] == null){
-                continue;
-              }
-              if(filename.equals(fileTable[i].getName())){
-                fd = i;
-              }
-            }
-            return fd;
-          }
-          else{
-            return -1;
-          }
-        }
- 
-        private int handleOpen(int name){
-          String filename = readVirtualMemoryString(name, 256);
-          OpenFile f = ThreadedKernel.fileSystem.open(filename, false);
-          if(f != null){
-            int fd = -1;
-            for(int i = 0; i < 16; i++){
-              if(fileTable[i] == null){
-                continue;
-              }
-              if(filename.equals(fileTable[i].getName())){
-                fd = i;
-              }
-            }
-            return fd;
-          }
-          else{
-            return -1;
-          }
-        }
- 
-        private int handleRead(int fd, int buffer, int count){
-          if(fd < 0 || fd > 15 || buffer < 0 || fileTable[fd] == null || fd == 1 || count < 0 || (count + buffer) > Machine.processor().getMemory().length){
-            return -1; // count + buffer???
-          } 
-          byte[] local_buffer = new byte[1024];
-          int counter = 0;
-          while(counter < count){
-            if((count - counter) >= 1024){
-              int readByte = 0;
-              if(fd == 0){
-                readByte = fileTable[fd].read(local_buffer, 0, 1024);
-              }
-              else{
-                readByte = fileTable[fd].read(counter, local_buffer, 0, 1024);
-              }
-              if(readByte == -1){ // if file is multiple of 1024?
-                return -1;
-              }
-              else{
-                if(readByte < 1024){ // if file is multiple of 1024?????
-                  byte[] offset_buffer = new byte[readByte];
-                  for(int i = 0; i < readByte; i++){
-                    offset_buffer[i] = local_buffer[i];
-                  }
-                  counter += writeVirtualMemory(buffer + counter, offset_buffer);
-                  return counter;
-                }
-                int writeByte = writeVirtualMemory(buffer + counter, local_buffer); // out of memeory???
-                counter += writeByte;
-                if(readByte == 1024 && writeByte < 1024){
-                  return counter;
-                }
-                // counter +1 run again?
-              }
-            }
-            else{
-              int readByte = 0;
-              if(fd == 0){
-                readByte = fileTable[fd].read(local_buffer, 0, (count - counter));
-              }
-              else{
-                readByte = fileTable[fd].read(counter, local_buffer, 0, (count - counter));
-              }
-              if(readByte == -1){
-                return -1;
-              }
-              else{
-                byte[] offset_buffer = new byte[readByte];
+/////////////////////////////////////////////////////////////////////////////////////////
 
-                for(int i = 0; i < offset_buffer.length; i++){
-                  offset_buffer[i] = local_buffer[i];
-                }
+	/**
+	 * Handle the create() and open() system call.
+	 * syscall.h: int open(char *name); int creat(char *name);
+	 */
+	private int handleCreateOpen(int virtualName, boolean ifCreate){
 
-                counter += writeVirtualMemory(buffer + counter, offset_buffer);
-                return counter;
-              }
-            }
-          }
-          return counter; // if counter == count
-        }
+		// find the filename by virtual address
+		String fileName = readVirtualMemoryString (virtualName, NAMEMAX);
 
-        private int handleWrite(int fd, int buffer, int count){ 
-           if(fd < 0 || fd > 15 || buffer < 0 || fileTable[fd] == null || fd == 0 || count < 0 || (count + buffer) > Machine.processor().getMemory().length){
-             return -1;
-           }
-           byte [] local_buffer = new byte[1024];
-           int counter = 0;
-           while(counter < count){
-             if((count - counter) >= 1024){
-               int readByte = readVirtualMemory(buffer + counter, local_buffer, 0, 1024);
-               if(readByte < 1024){
-                 return -1; // out of memory?
-               }
-               int writeByte = 0;
-               if(fd == 1){
-                 writeByte = fileTable[fd].write(local_buffer, 0, readByte);
-               }
-               else{
-                 writeByte = fileTable[fd].write(counter, local_buffer, 0, readByte);
-               }
-               if(writeByte == -1){
-                 return -1; // disk full or stream terminate
-               }
-               counter += writeByte;
-             }
-             else{
-               int readByte = readVirtualMemory(buffer + counter, local_buffer, 0, count - counter);
-//System.out.println("readByte: " + readByte);
-//System.out.println("count - counter :" + (count - counter));
-//System.out.println("count: "+count);
-//System.out.println("counter:" + counter);
-               if(readByte < (count - counter)){
-                 return -1;
-               }
-               int writeByte = 0;
-               if(fd == 1){
-                 writeByte = fileTable[fd].write(local_buffer, 0, readByte);
-               }
-               else{
-                 writeByte = fileTable[fd].write(counter, local_buffer, 0, readByte);
-               }
-               if(writeByte == -1){
-                 return -1;
-               }
-               counter += writeByte;
-//System.out.println(counter + "caonima");
-             }
-           }
-//System.out.println("break out the loop");
-           if(counter < count){
-//System.out.println("incorrect return");
-             return -1;
-           }
-           else{
-//System.out.println("correct return");
-             return counter;
-           }
-        }
+		// check if the filename is invalid
+		if(fileName == null) return ERROR;
 
-        private int handleClose(int fileDescriptor){
-          if(fileDescriptor < 0 || fileDescriptor > 15 || fileTable[fileDescriptor] == null){
-            return -1;
-          }
-          fileTable[fileDescriptor].close();  // catch exception???????
-          fileTable[fileDescriptor] = null;
-          return 0;
-        }
+		// setup the file descriptor (fd)
+		int fd = findFD();
 
-        private int handleUnlink(int name){
-          String filename = readVirtualMemoryString(name, 256);
-          for(int i = 0; i < 16; i++){
-            if(fileTable[i] == null){
-              continue;
-            }
-            if(filename.equals(fileTable[i].getName())){
-              if(handleClose(i) == -1){
-                return -1;
-              }
-            }   // while loop to check???? synchronization??? condition variable????
-          }
+		// check if file table is full
+		if(fd == ERROR) return ERROR;
 
-          //owever, creat() and open() will not be able to
-          //return new file descriptors for the file until it is deleted.
-          if(ThreadedKernel.fileSystem.remove(filename)){
-            return 0;
-          }
-          else{
-            return -1;
-          }
-        }
+		// setup the new open file object
+		OpenFile thisFile = ThreadedKernel.fileSystem.open(fileName, ifCreate);
+
+		// check if an error is occurred
+		if(thisFile == null) return ERROR;
+
+		// put the new file into the file table
+		fileTable[fd] = thisFile;
+		
+		// increment of files counter
+		numFile++;
+
+		return fd;
+	}
+
+	/**
+	 * Handle the read() system call.
+	 * 	syscall.h: 			int read(int fileDescriptor, void *buffer, int count);
+	 * 	OpenFile.read(): 	int read(int pos, byte[] buf, int offset, int length);
+	 * 							@param pos the offset in the file at which to start reading.
+	 * 							@param buf the buffer to store the bytes in.
+	 * 							@param offset the offset in the buffer to start storing bytes.
+	 * 							@param length the number of bytes to read.
+	 * 							@return the actual number of bytes successfully read, or -1 on failure.
+	 */
+	private int handleRead(int fd, int virtual, int n){
+		
+		// check if descriptor, virtual address and file object invalid
+		if(fd<0 || fd>MAXFPP-1 || virtual<0 || fileTable[fd] == null) return ERROR;
+		
+		// setup the file object
+		OpenFile file = fileTable[fd];
+		
+		// check if n invalid
+		if(n < 0) return ERROR;
+		
+		// setup the return value and offset for buffer and file
+		int ret = 0;
+		int bufOff = 0;
+		
+		// setup the temporary buffer
+		byte[] buffer = new byte[BUFSIZE];
+		
+		while(n>0) {
+			
+			// check if length the number of bytes to read is larger than the size of buffer
+			int shouldRead = (n > BUFSIZE) ? BUFSIZE : n;
+		
+			// read data from file to buffer
+			int fileToBuf = file.read(buffer, bufOff, shouldRead);
+					
+			// check if read successfully
+			if(fileToBuf == ERROR) return ERROR;
+			
+			// write data from buffer to virtual memory
+			int bufToVir = writeVirtualMemory(virtual, buffer, bufOff, fileToBuf);
+			
+			// check if write successfully
+			if(bufToVir == ERROR) return ERROR;
+			
+			// update variables
+			n -= bufToVir;
+			ret += bufToVir;
+			virtual += bufToVir;
+			
+			// check if reach the end of file or stream has fewer input than requested
+			if(bufToVir < shouldRead) return ret;
+		}
+		
+		return ret;
+	}
+
+	/**
+	 * Handle the write() system call.
+	 * 	syscall.h: 			int write(int fileDescriptor, void *buffer, int count);
+	 * 	OpenFile.write(): 	int write(int pos, byte[] buf, int offset, int length)
+	 * 							@param pos the offset in the file at which to start writing.
+	 * 							@param buf the buffer to get the bytes from.
+	 * 							@param offset the offset in the buffer to start getting.
+	 * 							@param length the number of bytes to write.
+	 * 							@return the actual number of bytes successfully written, or -1 on
+	 * failure.
+	 */
+	private int handleWrite(int fd, int virtual, int n){
+		
+		// check if descriptor invalid
+		if(fd<0 || fd>MAXFPP-1) return ERROR;
+		
+		// setup the file object
+		OpenFile file = fileTable[fd];
+		
+		// check if file object invalid
+		if(file == null) return	ERROR;
+		
+		// check if n invalid
+		if(n < 0) return ERROR;
+		
+		// setup the return value and offset for buffer and file
+		int ret = 0;
+		int bufOff = 0;
+		
+		// setup the temporary buffer
+		byte[] buffer = new byte[BUFSIZE];
+		
+		while(n>0) {
+			
+			// check if length the number of bytes to read is larger than the size of buffer
+			int shouldWrite = (n > BUFSIZE) ? BUFSIZE : n;
+			
+			// read data from virtual memory to buffer
+			int virToBuf = readVirtualMemory(virtual, buffer, bufOff, shouldWrite);
+			
+			// check if read successfully
+			if(virToBuf == ERROR) return ERROR;
+			
+			// write data from buffer to file
+			int bufToFile = file.write(buffer, bufOff, virToBuf);
+			
+			// check if read successfully
+			if(bufToFile == ERROR) return ERROR;
+			
+			// update variables
+			n -= bufToFile;
+			ret += bufToFile;
+			virtual += bufToFile;
+			
+			// check if disk is full or stream was terminated
+			if(bufToFile < shouldWrite) return ERROR;
+		}
+		
+		return ret;
+	}
+
+	/**
+	 * Handle the close() system call.
+	 * syscall.h: int close(int fileDescriptor);
+	 */
+	private int handleClose(int fd){
+		
+		// check if file descriptor is invalid
+		if(fd<0 || fd>=MAXFPP) return ERROR;
+		
+		// setup the open file object corresponding to descriptor
+		OpenFile file = fileTable[fd];
+		
+		// check if the object is exist
+		if(file == null) return ERROR;
+		
+		// close the file
+		file.close();
+		
+		// release the descriptor
+		fileTable[fd] = null;
+		
+		// decrement files counter
+		numFile--;
+		
+		return 0;
+		
+	}
+
+	/**
+	 * Handle the unlink() system call.
+	 * syscall.h: int unlink(char *name);
+	 */
+	private int handleUnlink(int virtualName){
+		// find the filename by virtual address
+		String fileName = readVirtualMemoryString (virtualName, NAMEMAX);
+
+		// check if the filename is invalid
+		if(fileName == null) return ERROR;
+		
+		// check if the file is in the file table
+		int fd = findFile(fileName);
+		while(fd != ERROR) {
+			handleClose(fd);
+			fd = findFile(fileName);
+		}
+		
+		// remove the file from file system
+		if(ThreadedKernel.fileSystem.remove(fileName)) return 0;
+		
+		return ERROR;
+	}
 
 
+/////////////////////////////////////////////////////////////////////////////////////////
+	
 	private static final int syscallHalt = 0, syscallExit = 1, syscallExec = 2,
 			syscallJoin = 3, syscallCreate = 4, syscallOpen = 5,
 			syscallRead = 6, syscallWrite = 7, syscallClose = 8,
@@ -590,7 +595,7 @@ public class UserProcess {
 	/**
 	 * Handle a syscall exception. Called by <tt>handleException()</tt>. The
 	 * <i>syscall</i> argument identifies which syscall the user executed:
-	 * 
+	 *
 	 * <table>
 	 * <tr>
 	 * <td>syscall#</td>
@@ -640,7 +645,7 @@ public class UserProcess {
 	 * <td><tt>int  unlink(char *name);</tt></td>
 	 * </tr>
 	 * </table>
-	 * 
+	 *
 	 * @param syscall the syscall number.
 	 * @param a0 the first syscall argument.
 	 * @param a1 the second syscall argument.
@@ -654,18 +659,19 @@ public class UserProcess {
 			return handleHalt();
 		case syscallExit:
 			return handleExit(a0);
-                case syscallCreate:
-			return handleCreate(a0);
-                case syscallOpen:
-			return handleOpen(a0);
-                case syscallRead:
+		case syscallCreate:
+			return handleCreateOpen(a0, CREATE);
+		case syscallOpen:
+			return handleCreateOpen(a0, OPEN);
+		case syscallRead:
 			return handleRead(a0, a1, a2);
-                case syscallWrite:
+		case syscallWrite:
 			return handleWrite(a0, a1, a2);
-                case syscallClose:
+		case syscallClose:
 			return handleClose(a0);
-                case syscallUnlink:
+		case syscallUnlink:
 			return handleUnlink(a0);
+
 		default:
 			Lib.debug(dbgProcess, "Unknown syscall " + syscall);
 			Lib.assertNotReached("Unknown system call!");
@@ -677,7 +683,7 @@ public class UserProcess {
 	 * Handle a user exception. Called by <tt>UserKernel.exceptionHandler()</tt>
 	 * . The <i>cause</i> argument identifies which exception occurred; see the
 	 * <tt>Processor.exceptionZZZ</tt> constants.
-	 * 
+	 *
 	 * @param cause the user exception that occurred.
 	 */
 	public void handleException(int cause) {
@@ -721,7 +727,44 @@ public class UserProcess {
 
 	private static final char dbgProcess = 'a';
 
-        private OpenFile[] fileTable = new OpenFile[16];
 
 
+	/** constant variables:
+	 * 		NAMEMAX:	max length of the name of a single file
+	 * 		ERROR:		return value for error
+	 * 		MAXFPP:		max number of open files per process
+	 * 		BUFSIZE:	size of buffer
+	 * 		CREATE:		boolean true for truncate of stubFileSystem.open()
+	 * 		OPEN:		boolean false for truncate of stubFileSystem.open()
+	 * 		numFile:	counter of opening files
+	 * 		fileTable:	array holding file descriptors of size 16
+	 */
+	private final int NAMEMAX = 256, ERROR = -1, MAXFPP = 16, BUFSIZE = 1024;
+	private final boolean CREATE = true, OPEN = false;
+	private int numFile;
+	private OpenFile[] fileTable;
+
+
+	/**
+	 * find unused file descriptor
+	 */
+	private int findFD(){
+		if(numFile < MAXFPP && numFile > ERROR) {
+			for(int i=0; i < MAXFPP; i++){
+				if(fileTable[i] == null) return i;
+			}
+		}
+		return ERROR;
+	}
+	
+	/**
+	 * check if the file is in file table by name
+	 * return file descriptor if exist, otherwise return -1
+	 */
+	private int findFile(String name) {
+		for(int i=0; i < MAXFPP; i++) {
+			if(fileTable[i].getName().equals(name)) return i;
+		}
+		return ERROR;
+	}
 }
