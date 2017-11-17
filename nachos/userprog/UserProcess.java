@@ -26,8 +26,19 @@ public class UserProcess {
 	public UserProcess() {
 		int numPhysPages = Machine.processor().getNumPhysPages();
 		pageTable = new TranslationEntry[numPhysPages];
-		for (int i = 0; i < numPhysPages; i++)
-			pageTable[i] = new TranslationEntry(i, i, true, false, false, false);
+                fileTable[0] = UserKernel.console.openForReading();
+                fileTable[1] = UserKernel.console.openForWriting();
+                for(int i = 2; i < 16.; i++){
+                  fileTable[i] = null;
+                }
+		for (int i = 0; i < numPhysPages; i++){
+                //      if(.isReadOnly()){
+		//	  pageTable[i] = new TranslationEntry(i, i, true, true, false, false);
+                  //    }
+                    //  else{
+                        pageTable[i] = new TranslationEntry(i, i, true, false, false, false);
+                      //}
+                }
 	}
 
 	/**
@@ -298,7 +309,7 @@ public class UserProcess {
 			Lib.debug(dbgProcess, "\tinsufficient physical memory");
 			return false;
 		}
-
+                //pageTable = new TranslationEntry[numPages];
 		// load sections
 		for (int s = 0; s < coff.getNumSections(); s++) {
 			CoffSection section = coff.getSection(s);
@@ -310,10 +321,17 @@ public class UserProcess {
 				int vpn = section.getFirstVPN() + i;
 
 				// for now, just assume virtual addresses=physical addresses
-				section.loadPage(i, vpn);
+			//	int ppn = userKernel.free_pages.removeLast();
+				section.loadPage(i, vpn); // this load to PMem?
+                            //    if(section.isReadOnly()){
+                             //     pageTable[i] = new TranslationEntry(ppn, ppn, true, true, false, false);
+                              //  }
+                               // else{    
+                                 // pageTable[i] = new TranslationEntry(ppn, ppn, true, false, false, false);
+                                //}
 			}
 		}
-
+// stack???
 		return true;
 	}
 
@@ -365,6 +383,188 @@ public class UserProcess {
 
 		return 0;
 	}
+
+        private int handleCreate(int name){
+          String filename = readVirtualMemoryString(name, 256);
+          OpenFile f = ThreadedKernel.fileSystem.open(filename, false);
+          if(f != null){
+            int fd = -1;
+            for(int i = 0; i < 16; i++){
+              if(fileTable[i] == null){
+                fd = i;
+                fileTable[i] = f;
+                break;
+              }
+            }
+            return fd;
+          }
+          else{
+            f = ThreadedKernel.fileSystem.open(filename, true);
+            if(f != null){
+              int fd = -1;
+              for(int i = 0; i < 16; i++){
+                if(fileTable[i] == null){
+                  fd = i;
+                  fileTable[i] = f;
+                  break;
+                }
+              }
+              return fd;
+            }
+            else{
+              return -1;
+            }
+          }
+        }
+ 
+        private int handleOpen(int name){
+          String filename = readVirtualMemoryString(name, 256);
+          OpenFile f = ThreadedKernel.fileSystem.open(filename, false);
+          if(f != null){
+            int fd = -1;
+            for(int i = 0; i < 16; i++){
+              if(fileTable[i] == null){
+                fd = i;
+                fileTable[i] = f;
+                break;
+              }
+            }
+            return fd;
+          }
+          else{
+            return -1;
+          }
+        }
+ 
+        private int handleRead(int fd, int buffer, int count){
+          if(fd < 0 || fd > 15 || buffer < 0 || fileTable[fd] == null || count < 0){
+            return -1;
+          } 
+          byte[] local_buffer = new byte[1024];
+          int counter = 0;
+          while(counter < count){
+            if((count - counter) >= 1024){
+              int readByte = 0;
+
+              readByte = fileTable[fd].read(local_buffer, 0, 1024);
+              
+              if(readByte == -1){
+                return -1;
+              }
+              else{
+                int writeByte = 0;
+                if(readByte < 1024){
+                  byte[] offset_buffer = new byte[readByte];
+                  for(int i = 0; i < readByte; i++){
+                    offset_buffer[i] = local_buffer[i];
+                  }
+                  writeByte = writeVirtualMemory(buffer + counter, offset_buffer);
+                  // assert out of memory error
+                  if(writeByte < readByte){
+                    return -1;
+                  }
+                  // --------------------
+                  counter += writeByte;
+                  return counter;
+                }
+                writeByte = writeVirtualMemory(buffer + counter, local_buffer); // out of memeory???
+                counter += writeByte;
+                // assert out of memory error
+                if(writeByte < 1024){
+                  return -1;
+                }
+                // ------------------------
+              }
+            }
+
+            else{
+              int readByte = 0;
+              int writeByte = 0;
+              readByte = fileTable[fd].read(local_buffer, 0, (count - counter));
+              
+              if(readByte == -1){
+                return -1;
+              }
+              else{
+                byte[] offset_buffer = new byte[readByte];
+                for(int i = 0; i < offset_buffer.length; i++){
+                  offset_buffer[i] = local_buffer[i];
+                }
+                writeByte = writeVirtualMemory(buffer + counter, offset_buffer);
+                // assert out of memory error
+                if(writeByte < readByte){
+                  return -1;
+                }
+                // -------------------------------------
+                counter += writeByte;
+
+                return counter;
+              }
+            }
+          }
+          return counter; // if counter == count
+        }
+
+        private int handleWrite(int fd, int buffer, int count){ 
+           if(fd < 0 || fd > 15 || buffer < 0 || fileTable[fd] == null || count < 0){
+             return -1;
+           }
+           byte [] local_buffer = new byte[1024];
+           int counter = 0;
+           while(counter < count){
+             if((count - counter) >= 1024){
+               int readByte = readVirtualMemory(buffer + counter, local_buffer, 0, 1024);
+               if(readByte < 1024){
+                 return -1; // out of memory?
+               }
+
+               int writeByte = 0;
+               writeByte = fileTable[fd].write(local_buffer, 0, readByte);
+               if(writeByte == -1){
+                 return -1; // disk full or stream terminate
+               }
+               counter += writeByte;
+             }
+             else{
+               int readByte = readVirtualMemory(buffer + counter, local_buffer, 0, count - counter);
+               if(readByte < (count - counter)){
+                 return -1;
+               }
+               int writeByte = 0;
+               writeByte = fileTable[fd].write(local_buffer, 0, readByte);
+               // if not correctly write do not need to check less than readByte because it must return readByte 
+               if(writeByte == -1){
+                 return -1;
+               }
+               counter += writeByte;
+             }
+           } 
+       
+           return counter;
+        }
+
+        private int handleClose(int fileDescriptor){
+          if(fileDescriptor < 0 || fileDescriptor > 15 || fileTable[fileDescriptor] == null){
+            return -1;
+          }
+          fileTable[fileDescriptor].close();  // catch exception??????? file must be opened????
+          fileTable[fileDescriptor] = null;
+          return 0;
+        }
+
+        private int handleUnlink(int name){
+          String filename = readVirtualMemoryString(name, 256);
+
+          //however, creat() and open() will not be able to
+          //return new file descriptors for the file until it is deleted.
+          if(ThreadedKernel.fileSystem.remove(filename)){
+            return 0;
+          }
+          else{
+            return -1;
+          }
+        }
+
 
 	private static final int syscallHalt = 0, syscallExit = 1, syscallExec = 2,
 			syscallJoin = 3, syscallCreate = 4, syscallOpen = 5,
@@ -438,7 +638,18 @@ public class UserProcess {
 			return handleHalt();
 		case syscallExit:
 			return handleExit(a0);
-
+                case syscallCreate:
+			return handleCreate(a0);
+                case syscallOpen:
+			return handleOpen(a0);
+                case syscallRead:
+			return handleRead(a0, a1, a2);
+                case syscallWrite:
+			return handleWrite(a0, a1, a2);
+                case syscallClose:
+			return handleClose(a0);
+                case syscallUnlink:
+			return handleUnlink(a0);
 		default:
 			Lib.debug(dbgProcess, "Unknown syscall " + syscall);
 			Lib.assertNotReached("Unknown system call!");
@@ -493,4 +704,8 @@ public class UserProcess {
 	private static final int pageSize = Processor.pageSize;
 
 	private static final char dbgProcess = 'a';
+
+        private OpenFile[] fileTable = new OpenFile[16];
+
+
 }
