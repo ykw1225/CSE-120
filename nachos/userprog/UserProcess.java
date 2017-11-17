@@ -4,6 +4,7 @@ import nachos.machine.*;
 import nachos.threads.*;
 import nachos.userprog.*;
 import nachos.vm.*;
+import java.util.LinkedList;
 
 import java.io.EOFException;
 
@@ -24,15 +25,12 @@ public class UserProcess {
 	 * Allocate a new process.
 	 */
 	public UserProcess() {
-		int numPhysPages = Machine.processor().getNumPhysPages();
-		pageTable = new TranslationEntry[numPhysPages];
                 fileTable[0] = UserKernel.console.openForReading();
                 fileTable[1] = UserKernel.console.openForWriting();
                 for(int i = 2; i < 16.; i++){
                   fileTable[i] = null;
                 }
-		for (int i = 0; i < numPhysPages; i++)
-			pageTable[i] = new TranslationEntry(i, i, true, false, false, false);
+                used_pages = new LinkedList<Integer>();
 	}
 
 	/**
@@ -151,12 +149,24 @@ public class UserProcess {
 
 		byte[] memory = Machine.processor().getMemory();
 
+                if(vaddr < 0){
+                  return 0;
+                }
+                int paddr = -1; int ppn = -1000000;
+                int paddr_offset = vaddr % pageSize;
+                int vpn = (vaddr - paddr_offset) / pageSize;
+                for(int i = 0; i < pageTable.length; i++){
+                  if(pageTable[i].vpn == vpn){
+                    paddr = pageTable[i].ppn * pageSize + paddr_offset; ppn = pageTable[i].ppn;
+                  }
+                }
+System.out.println("paddr: "+paddr+" vaddr: "+vaddr+" ppn: "+ppn+" vpn: "+vpn+" paddr_offset: "+paddr_offset+"pageSize: "+pageSize);
 		// for now, just assume that virtual addresses equal physical addresses
-		if (vaddr < 0 || vaddr >= memory.length)
+		if (paddr < 0 || paddr >= memory.length)
 			return 0;
 
-		int amount = Math.min(length, memory.length - vaddr);
-		System.arraycopy(memory, vaddr, data, offset, amount);
+		int amount = Math.min(length, memory.length - paddr);
+		System.arraycopy(memory, paddr, data, offset, amount);
 
 		return amount;
 	}
@@ -193,12 +203,24 @@ public class UserProcess {
 
 		byte[] memory = Machine.processor().getMemory();
 
+                if(vaddr < 0){
+                  return 0;
+                }
+                int paddr = -1;
+                int paddr_offset = vaddr % pageSize;
+                int vpn = (vaddr - paddr_offset) / pageSize;
+                for(int i = 0; i < pageTable.length; i++){
+                  if(pageTable[i].vpn == vpn){
+                    paddr = pageTable[i].ppn * pageSize + paddr_offset;
+                  }
+                }
+
 		// for now, just assume that virtual addresses equal physical addresses
-		if (vaddr < 0 || vaddr >= memory.length)
+		if (paddr < 0 || paddr >= memory.length)
 			return 0;
 
-		int amount = Math.min(length, memory.length - vaddr);
-		System.arraycopy(data, offset, memory, vaddr, amount);
+		int amount = Math.min(length, memory.length - paddr);
+		System.arraycopy(data, offset, memory, paddr, amount);
 
 		return amount;
 	}
@@ -286,7 +308,7 @@ public class UserProcess {
 			Lib.assertTrue(writeVirtualMemory(stringOffset, new byte[] { 0 }) == 1);
 			stringOffset += 1;
 		}
-
+System.out.println("zhunbeiyaopaole");
 		return true;
 	}
 
@@ -298,12 +320,17 @@ public class UserProcess {
 	 * @return <tt>true</tt> if the sections were successfully loaded.
 	 */
 	protected boolean loadSections() {
-		if (numPages > Machine.processor().getNumPhysPages()) {
+                boolean status = Machine.interrupt().disable();
+		if (numPages > UserKernel.free_pages.size()) {
 			coff.close();
 			Lib.debug(dbgProcess, "\tinsufficient physical memory");
 			return false;
 		}
-
+                int cu=0;
+                pageTable = new TranslationEntry[Machine.processor().getNumPhysPages()];
+                for(int i = 0; i < Machine.processor().getNumPhysPages(); i++){
+                  pageTable[i] = new TranslationEntry(i, i, true, false, false, false);
+                }
 		// load sections
 		for (int s = 0; s < coff.getNumSections(); s++) {
 			CoffSection section = coff.getSection(s);
@@ -313,12 +340,26 @@ public class UserProcess {
 
 			for (int i = 0; i < section.getLength(); i++) {
 				int vpn = section.getFirstVPN() + i;
-
 				// for now, just assume virtual addresses=physical addresses
-				section.loadPage(i, vpn);
+				int ppn = UserKernel.free_pages.removeLast();
+                                used_pages.add(ppn);
+				section.loadPage(i, ppn); // this load to PMem?
+                                if(section.isReadOnly()){System.out.println("gou bi cao made   "+cu);
+                                  pageTable[cu] = new TranslationEntry(vpn, ppn, true, true, false, false);
+                                }
+                                else{    
+                                  pageTable[cu] = new TranslationEntry(vpn, ppn, true, false, false, false);
+                                }
+                                cu++;
+System.out.println("vpn: "+vpn+"i:"+i+"  asdas   "+coff.getNumSections() + " ppn: " + ppn);
+
 			}
 		}
-
+// stack???     
+              //  for(int i = 0; i < 9; i++){
+              //      pageTable[i] = new TranslationEntry(,true, true, false, false)
+              //  } 
+                Machine.interrupt().restore(status);
 		return true;
 	}
 
@@ -326,6 +367,11 @@ public class UserProcess {
 	 * Release any resources allocated by <tt>loadSections()</tt>.
 	 */
 	protected void unloadSections() {
+          boolean status = Machine.interrupt().disable();
+          for(int i = 0; i < used_pages.size(); i++){
+            UserKernel.free_pages.add(used_pages.removeLast());
+          }
+          Machine.interrupt().restore(status);
 	}
 
 	/**
@@ -373,40 +419,34 @@ public class UserProcess {
 
         private int handleCreate(int name){
           String filename = readVirtualMemoryString(name, 256);
-          boolean create = true;
-          for(int i = 0; i < 16; i++){
-            if(fileTable[i] == null){
-              continue;
-            }
-            if(filename.equals(fileTable[i].getName())){
-              create = false;
-            }
-          }
-          OpenFile f = ThreadedKernel.fileSystem.open(filename, create);
-          if(f != null && create == true){
+          OpenFile f = ThreadedKernel.fileSystem.open(filename, false);
+          if(f != null){
             int fd = -1;
             for(int i = 0; i < 16; i++){
               if(fileTable[i] == null){
+                fd = i;
                 fileTable[i] = f;
-                fd = i;
-              }
-            }
-            return fd;
-          }
-          else if(f != null && create == false){
-            int fd = -1;
-            for(int i = 0; i < 16; i++){
-              if(fileTable[i] == null){
-                continue;
-              }
-              if(filename.equals(fileTable[i].getName())){
-                fd = i;
+                break;
               }
             }
             return fd;
           }
           else{
-            return -1;
+            f = ThreadedKernel.fileSystem.open(filename, true);
+            if(f != null){
+              int fd = -1;
+              for(int i = 0; i < 16; i++){
+                if(fileTable[i] == null){
+                  fd = i;
+                  fileTable[i] = f;
+                  break;
+                }
+              }
+              return fd;
+            }
+            else{
+              return -1;
+            }
           }
         }
  
@@ -417,10 +457,9 @@ public class UserProcess {
             int fd = -1;
             for(int i = 0; i < 16; i++){
               if(fileTable[i] == null){
-                continue;
-              }
-              if(filename.equals(fileTable[i].getName())){
                 fd = i;
+                fileTable[i] = f;
+                break;
               }
             }
             return fd;
@@ -431,59 +470,67 @@ public class UserProcess {
         }
  
         private int handleRead(int fd, int buffer, int count){
-          if(fd < 0 || fd > 15 || buffer < 0 || fileTable[fd] == null || fd == 1 || count < 0 || (count + buffer) > Machine.processor().getMemory().length){
-            return -1; // count + buffer???
+          if(fd < 0 || fd > 15 || buffer < 0 || fileTable[fd] == null || count < 0){
+            return -1;
           } 
           byte[] local_buffer = new byte[1024];
           int counter = 0;
           while(counter < count){
             if((count - counter) >= 1024){
               int readByte = 0;
-              if(fd == 0){
-                readByte = fileTable[fd].read(local_buffer, 0, 1024);
-              }
-              else{
-                readByte = fileTable[fd].read(counter, local_buffer, 0, 1024);
-              }
-              if(readByte == -1){ // if file is multiple of 1024?
+
+              readByte = fileTable[fd].read(local_buffer, 0, 1024);
+              
+              if(readByte == -1){
                 return -1;
               }
               else{
-                if(readByte < 1024){ // if file is multiple of 1024?????
+                int writeByte = 0;
+                if(readByte < 1024){
                   byte[] offset_buffer = new byte[readByte];
                   for(int i = 0; i < readByte; i++){
                     offset_buffer[i] = local_buffer[i];
                   }
-                  counter += writeVirtualMemory(buffer + counter, offset_buffer);
+                  writeByte = writeVirtualMemory(buffer + counter, offset_buffer);
+                  // assert out of memory error
+                  if(writeByte < readByte){
+                    return -1;
+                  }
+                  // --------------------
+                  counter += writeByte;
                   return counter;
                 }
-                int writeByte = writeVirtualMemory(buffer + counter, local_buffer); // out of memeory???
+                writeByte = writeVirtualMemory(buffer + counter, local_buffer); // out of memeory???
                 counter += writeByte;
-                if(readByte == 1024 && writeByte < 1024){
-                  return counter;
+                // assert out of memory error
+                if(writeByte < 1024){
+                  return -1;
                 }
-                // counter +1 run again?
+                // ------------------------
               }
             }
+
             else{
               int readByte = 0;
-              if(fd == 0){
-                readByte = fileTable[fd].read(local_buffer, 0, (count - counter));
-              }
-              else{
-                readByte = fileTable[fd].read(counter, local_buffer, 0, (count - counter));
-              }
+              int writeByte = 0;
+              readByte = fileTable[fd].read(local_buffer, 0, (count - counter));
+              
               if(readByte == -1){
                 return -1;
               }
               else{
                 byte[] offset_buffer = new byte[readByte];
-
                 for(int i = 0; i < offset_buffer.length; i++){
                   offset_buffer[i] = local_buffer[i];
                 }
+                writeByte = writeVirtualMemory(buffer + counter, offset_buffer);
+                // assert out of memory error
+                if(writeByte < readByte){
+                  return -1;
+                }
+                // -------------------------------------
+                counter += writeByte;
 
-                counter += writeVirtualMemory(buffer + counter, offset_buffer);
                 return counter;
               }
             }
@@ -492,7 +539,7 @@ public class UserProcess {
         }
 
         private int handleWrite(int fd, int buffer, int count){ 
-           if(fd < 0 || fd > 15 || buffer < 0 || fileTable[fd] == null || fd == 0 || count < 0 || (count + buffer) > Machine.processor().getMemory().length){
+           if(fd < 0 || fd > 15 || buffer < 0 || fileTable[fd] == null || count < 0){
              return -1;
            }
            byte [] local_buffer = new byte[1024];
@@ -503,13 +550,9 @@ public class UserProcess {
                if(readByte < 1024){
                  return -1; // out of memory?
                }
+
                int writeByte = 0;
-               if(fd == 1){
-                 writeByte = fileTable[fd].write(local_buffer, 0, readByte);
-               }
-               else{
-                 writeByte = fileTable[fd].write(counter, local_buffer, 0, readByte);
-               }
+               writeByte = fileTable[fd].write(local_buffer, 0, readByte);
                if(writeByte == -1){
                  return -1; // disk full or stream terminate
                }
@@ -517,61 +560,35 @@ public class UserProcess {
              }
              else{
                int readByte = readVirtualMemory(buffer + counter, local_buffer, 0, count - counter);
-//System.out.println("readByte: " + readByte);
-//System.out.println("count - counter :" + (count - counter));
-//System.out.println("count: "+count);
-//System.out.println("counter:" + counter);
                if(readByte < (count - counter)){
                  return -1;
                }
                int writeByte = 0;
-               if(fd == 1){
-                 writeByte = fileTable[fd].write(local_buffer, 0, readByte);
-               }
-               else{
-                 writeByte = fileTable[fd].write(counter, local_buffer, 0, readByte);
-               }
+               writeByte = fileTable[fd].write(local_buffer, 0, readByte);
+               // if not correctly write do not need to check less than readByte because it must return readByte 
                if(writeByte == -1){
                  return -1;
                }
                counter += writeByte;
-//System.out.println(counter + "caonima");
              }
-           }
-//System.out.println("break out the loop");
-           if(counter < count){
-//System.out.println("incorrect return");
-             return -1;
-           }
-           else{
-//System.out.println("correct return");
-             return counter;
-           }
+           } 
+       
+           return counter;
         }
 
         private int handleClose(int fileDescriptor){
           if(fileDescriptor < 0 || fileDescriptor > 15 || fileTable[fileDescriptor] == null){
             return -1;
           }
-          fileTable[fileDescriptor].close();  // catch exception???????
+          fileTable[fileDescriptor].close();  // catch exception??????? file must be opened????
           fileTable[fileDescriptor] = null;
           return 0;
         }
 
         private int handleUnlink(int name){
           String filename = readVirtualMemoryString(name, 256);
-          for(int i = 0; i < 16; i++){
-            if(fileTable[i] == null){
-              continue;
-            }
-            if(filename.equals(fileTable[i].getName())){
-              if(handleClose(i) == -1){
-                return -1;
-              }
-            }   // while loop to check???? synchronization??? condition variable????
-          }
 
-          //owever, creat() and open() will not be able to
+          //however, creat() and open() will not be able to
           //return new file descriptors for the file until it is deleted.
           if(ThreadedKernel.fileSystem.remove(filename)){
             return 0;
@@ -696,7 +713,7 @@ public class UserProcess {
 
 		default:
 			Lib.debug(dbgProcess, "Unexpected exception: "
-					+ Processor.exceptionNames[cause]);
+					+ Processor.exceptionNames[cause]);System.out.println(Processor.exceptionNames[cause]);
 			Lib.assertNotReached("Unexpected exception");
 		}
 	}
@@ -723,5 +740,5 @@ public class UserProcess {
 
         private OpenFile[] fileTable = new OpenFile[16];
 
-
+        private LinkedList<Integer> used_pages;
 }
