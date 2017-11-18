@@ -1,13 +1,84 @@
-------[ Thu Nov 16 15:00:22 2017 ]------
+------[ Fri Nov 17 14:00:22 2017 ]------
 --[ tests write1.c ]--
 stty: standard input: Inappropriate ioctl for device
 stty: standard input: Inappropriate ioctl for device
 nachos 5.0j initializing... config interrupt timer processor console user-check grader
+gou bi cao made   0
+vpn: 0i:0  asdas   4 ppn: 63
+gou bi cao made   1
+vpn: 1i:1  asdas   4 ppn: 62
+gou bi cao made   2
+vpn: 2i:2  asdas   4 ppn: 61
+gou bi cao made   3
+vpn: 3i:0  asdas   4 ppn: 60
+vpn: 4i:0  asdas   4 ppn: 59
+zhunbeiyaopaole
+paddr: 61440 vaddr: 3072 ppn: 60 vpn: 3 paddr_offset: 0pageSize: 1024
 
-roses are red
-violets are blue
-I love Nachos
-and so do you
+paddr: 61441 vaddr: 3073 ppn: 60 vpn: 3 paddr_offset: 1pageSize: 1024
+rpaddr: 61442 vaddr: 3074 ppn: 60 vpn: 3 paddr_offset: 2pageSize: 1024
+opaddr: 61443 vaddr: 3075 ppn: 60 vpn: 3 paddr_offset: 3pageSize: 1024
+spaddr: 61444 vaddr: 3076 ppn: 60 vpn: 3 paddr_offset: 4pageSize: 1024
+epaddr: 61445 vaddr: 3077 ppn: 60 vpn: 3 paddr_offset: 5pageSize: 1024
+spaddr: 61446 vaddr: 3078 ppn: 60 vpn: 3 paddr_offset: 6pageSize: 1024
+ paddr: 61447 vaddr: 3079 ppn: 60 vpn: 3 paddr_offset: 7pageSize: 1024
+apaddr: 61448 vaddr: 3080 ppn: 60 vpn: 3 paddr_offset: 8pageSize: 1024
+rpaddr: 61449 vaddr: 3081 ppn: 60 vpn: 3 paddr_offset: 9pageSize: 1024
+epaddr: 61450 vaddr: 3082 ppn: 60 vpn: 3 paddr_offset: 10pageSize: 1024
+ paddr: 61451 vaddr: 3083 ppn: 60 vpn: 3 paddr_offset: 11pageSize: 1024
+rpaddr: 61452 vaddr: 3084 ppn: 60 vpn: 3 paddr_offset: 12pageSize: 1024
+epaddr: 61453 vaddr: 3085 ppn: 60 vpn: 3 paddr_offset: 13pageSize: 1024
+dpaddr: 61454 vaddr: 3086 ppn: 60 vpn: 3 paddr_offset: 14pageSize: 1024
+
+paddr: 61455 vaddr: 3087 ppn: 60 vpn: 3 paddr_offset: 15pageSize: 1024
+vpaddr: 61456 vaddr: 3088 ppn: 60 vpn: 3 paddr_offset: 16pageSize: 1024
+ipaddr: 61457 vaddr: 3089 ppn: 60 vpn: 3 paddr_offset: 17pageSize: 1024
+opaddr: 61458 vaddr: 3090 ppn: 60 vpn: 3 paddr_offset: 18pageSize: 1024
+lpaddr: 61459 vaddr: 3091 ppn: 60 vpn: 3 paddr_offset: 19pageSize: 1024
+epaddr: 61460 vaddr: 3092 ppn: 60 vpn: 3 paddr_offset: 20pageSize: 1024
+tpaddr: 61461 vaddr: 3093 ppn: 60 vpn: 3 paddr_offset: 21pageSize: 1024
+spaddr: 61462 vaddr: 3094 ppn: 60 vpn: 3 paddr_offset: 22pageSize: 1024
+ paddr: 61463 vaddr: 3095 ppn: 60 vpn: 3 paddr_offset: 23pageSize: 1024
+apaddr: 61464 vaddr: 3096 ppn: 60 vpn: 3 paddr_offset: 24pageSize: 1024
+rpaddr: 61465 vaddr: 3097 ppn: 60 vpn: 3 paddr_offset: 25pageSize: 1024
+epaddr: 61466 vaddr: 3098 ppn: 60 vpn: 3 paddr_offset: 26pageSize: 1024
+ paddr: 61467 vaddr: 3099 ppn: 60 vpn: 3 paddr_offset: 27pageSize: 1024
+bpaddr: 61468 vaddr: 3100 ppn: 60 vpn: 3 paddr_offset: 28pageSize: 1024
+lpaddr: 61469 vaddr: 3101 ppn: 60 vpn: 3 paddr_offset: 29pageSize: 1024
+upaddr: 61470 vaddr: 3102 ppn: 60 vpn: 3 paddr_offset: 30pageSize: 1024
+epaddr: 61471 vaddr: 3103 ppn: 60 vpn: 3 paddr_offset: 31pageSize: 1024
+
+paddr: 61472 vaddr: 3104 ppn: 60 vpn: 3 paddr_offset: 32pageSize: 1024
+Ipaddr: 61473 vaddr: 3105 ppn: 60 vpn: 3 paddr_offset: 33pageSize: 1024
+ paddr: 61474 vaddr: 3106 ppn: 60 vpn: 3 paddr_offset: 34pageSize: 1024
+lpaddr: 61475 vaddr: 3107 ppn: 60 vpn: 3 paddr_offset: 35pageSize: 1024
+opaddr: 61476 vaddr: 3108 ppn: 60 vpn: 3 paddr_offset: 36pageSize: 1024
+vpaddr: 61477 vaddr: 3109 ppn: 60 vpn: 3 paddr_offset: 37pageSize: 1024
+epaddr: 61478 vaddr: 3110 ppn: 60 vpn: 3 paddr_offset: 38pageSize: 1024
+ paddr: 61479 vaddr: 3111 ppn: 60 vpn: 3 paddr_offset: 39pageSize: 1024
+Npaddr: 61480 vaddr: 3112 ppn: 60 vpn: 3 paddr_offset: 40pageSize: 1024
+apaddr: 61481 vaddr: 3113 ppn: 60 vpn: 3 paddr_offset: 41pageSize: 1024
+cpaddr: 61482 vaddr: 3114 ppn: 60 vpn: 3 paddr_offset: 42pageSize: 1024
+hpaddr: 61483 vaddr: 3115 ppn: 60 vpn: 3 paddr_offset: 43pageSize: 1024
+opaddr: 61484 vaddr: 3116 ppn: 60 vpn: 3 paddr_offset: 44pageSize: 1024
+spaddr: 61485 vaddr: 3117 ppn: 60 vpn: 3 paddr_offset: 45pageSize: 1024
+
+paddr: 61486 vaddr: 3118 ppn: 60 vpn: 3 paddr_offset: 46pageSize: 1024
+apaddr: 61487 vaddr: 3119 ppn: 60 vpn: 3 paddr_offset: 47pageSize: 1024
+npaddr: 61488 vaddr: 3120 ppn: 60 vpn: 3 paddr_offset: 48pageSize: 1024
+dpaddr: 61489 vaddr: 3121 ppn: 60 vpn: 3 paddr_offset: 49pageSize: 1024
+ paddr: 61490 vaddr: 3122 ppn: 60 vpn: 3 paddr_offset: 50pageSize: 1024
+spaddr: 61491 vaddr: 3123 ppn: 60 vpn: 3 paddr_offset: 51pageSize: 1024
+opaddr: 61492 vaddr: 3124 ppn: 60 vpn: 3 paddr_offset: 52pageSize: 1024
+ paddr: 61493 vaddr: 3125 ppn: 60 vpn: 3 paddr_offset: 53pageSize: 1024
+dpaddr: 61494 vaddr: 3126 ppn: 60 vpn: 3 paddr_offset: 54pageSize: 1024
+opaddr: 61495 vaddr: 3127 ppn: 60 vpn: 3 paddr_offset: 55pageSize: 1024
+ paddr: 61496 vaddr: 3128 ppn: 60 vpn: 3 paddr_offset: 56pageSize: 1024
+ypaddr: 61497 vaddr: 3129 ppn: 60 vpn: 3 paddr_offset: 57pageSize: 1024
+opaddr: 61498 vaddr: 3130 ppn: 60 vpn: 3 paddr_offset: 58pageSize: 1024
+upaddr: 61499 vaddr: 3131 ppn: 60 vpn: 3 paddr_offset: 59pageSize: 1024
+
+paddr: 61500 vaddr: 3132 ppn: 60 vpn: 3 paddr_offset: 60pageSize: 1024
 
 
 success
@@ -16,186 +87,364 @@ stty: standard input: Inappropriate ioctl for device
 stty: standard input: Inappropriate ioctl for device
 stty: standard input: Inappropriate ioctl for device
 nachos 5.0j initializing... config interrupt timer processor console user-check grader
+gou bi cao made   0
+vpn: 0i:0  asdas   4 ppn: 63
+gou bi cao made   1
+vpn: 1i:1  asdas   4 ppn: 62
+gou bi cao made   2
+vpn: 2i:2  asdas   4 ppn: 61
+gou bi cao made   3
+vpn: 3i:3  asdas   4 ppn: 60
+gou bi cao made   4
+vpn: 4i:4  asdas   4 ppn: 59
+gou bi cao made   5
+vpn: 5i:0  asdas   4 ppn: 58
+gou bi cao made   6
+vpn: 6i:1  asdas   4 ppn: 57
+vpn: 7i:0  asdas   4 ppn: 56
+vpn: 8i:0  asdas   4 ppn: 55
+vpn: 9i:1  asdas   4 ppn: 54
+vpn: 10i:2  asdas   4 ppn: 53
+vpn: 11i:3  asdas   4 ppn: 52
+vpn: 12i:4  asdas   4 ppn: 51
+vpn: 13i:5  asdas   4 ppn: 50
+vpn: 14i:6  asdas   4 ppn: 49
+vpn: 15i:7  asdas   4 ppn: 48
+vpn: 16i:8  asdas   4 ppn: 47
+zhunbeiyaopaole
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 creating write.out...
+paddr: 59868 vaddr: 5596 ppn: 58 vpn: 5 paddr_offset: 476pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (fd = 2)
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 writing 59 bytes to file, 59 bytes at a time...
+paddr: 59808 vaddr: 5536 ppn: 58 vpn: 5 paddr_offset: 416pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 59 bytes)
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 closing 2...
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 opening write.out...
+paddr: 59868 vaddr: 5596 ppn: 58 vpn: 5 paddr_offset: 476pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (fd = 2)
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 reading write.out into buffer...
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...success
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 validating write.out...
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 closing 2...
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 creating write.out...
+paddr: 59868 vaddr: 5596 ppn: 58 vpn: 5 paddr_offset: 476pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (fd = 2)
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 writing 59 bytes to file, 8 bytes at a time...
+paddr: 59808 vaddr: 5536 ppn: 58 vpn: 5 paddr_offset: 416pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 8 bytes)
+paddr: 59816 vaddr: 5544 ppn: 58 vpn: 5 paddr_offset: 424pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 8 bytes)
+paddr: 59824 vaddr: 5552 ppn: 58 vpn: 5 paddr_offset: 432pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 8 bytes)
+paddr: 59832 vaddr: 5560 ppn: 58 vpn: 5 paddr_offset: 440pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 8 bytes)
+paddr: 59840 vaddr: 5568 ppn: 58 vpn: 5 paddr_offset: 448pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 8 bytes)
+paddr: 59848 vaddr: 5576 ppn: 58 vpn: 5 paddr_offset: 456pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 8 bytes)
+paddr: 59856 vaddr: 5584 ppn: 58 vpn: 5 paddr_offset: 464pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 8 bytes)
+paddr: 59864 vaddr: 5592 ppn: 58 vpn: 5 paddr_offset: 472pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 3 bytes)
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 closing 2...
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 opening write.out...
+paddr: 59868 vaddr: 5596 ppn: 58 vpn: 5 paddr_offset: 476pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (fd = 2)
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 reading write.out into buffer...
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...success
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 validating write.out...
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 closing 2...
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 creating write.out...
+paddr: 59868 vaddr: 5596 ppn: 58 vpn: 5 paddr_offset: 476pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (fd = 2)
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 writing 59 bytes to file, 1 bytes at a time...
+paddr: 59808 vaddr: 5536 ppn: 58 vpn: 5 paddr_offset: 416pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59809 vaddr: 5537 ppn: 58 vpn: 5 paddr_offset: 417pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59810 vaddr: 5538 ppn: 58 vpn: 5 paddr_offset: 418pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59811 vaddr: 5539 ppn: 58 vpn: 5 paddr_offset: 419pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59812 vaddr: 5540 ppn: 58 vpn: 5 paddr_offset: 420pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59813 vaddr: 5541 ppn: 58 vpn: 5 paddr_offset: 421pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59814 vaddr: 5542 ppn: 58 vpn: 5 paddr_offset: 422pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59815 vaddr: 5543 ppn: 58 vpn: 5 paddr_offset: 423pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59816 vaddr: 5544 ppn: 58 vpn: 5 paddr_offset: 424pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59817 vaddr: 5545 ppn: 58 vpn: 5 paddr_offset: 425pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59818 vaddr: 5546 ppn: 58 vpn: 5 paddr_offset: 426pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59819 vaddr: 5547 ppn: 58 vpn: 5 paddr_offset: 427pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59820 vaddr: 5548 ppn: 58 vpn: 5 paddr_offset: 428pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59821 vaddr: 5549 ppn: 58 vpn: 5 paddr_offset: 429pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59822 vaddr: 5550 ppn: 58 vpn: 5 paddr_offset: 430pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59823 vaddr: 5551 ppn: 58 vpn: 5 paddr_offset: 431pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59824 vaddr: 5552 ppn: 58 vpn: 5 paddr_offset: 432pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59825 vaddr: 5553 ppn: 58 vpn: 5 paddr_offset: 433pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59826 vaddr: 5554 ppn: 58 vpn: 5 paddr_offset: 434pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59827 vaddr: 5555 ppn: 58 vpn: 5 paddr_offset: 435pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59828 vaddr: 5556 ppn: 58 vpn: 5 paddr_offset: 436pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59829 vaddr: 5557 ppn: 58 vpn: 5 paddr_offset: 437pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59830 vaddr: 5558 ppn: 58 vpn: 5 paddr_offset: 438pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59831 vaddr: 5559 ppn: 58 vpn: 5 paddr_offset: 439pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59832 vaddr: 5560 ppn: 58 vpn: 5 paddr_offset: 440pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59833 vaddr: 5561 ppn: 58 vpn: 5 paddr_offset: 441pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59834 vaddr: 5562 ppn: 58 vpn: 5 paddr_offset: 442pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59835 vaddr: 5563 ppn: 58 vpn: 5 paddr_offset: 443pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59836 vaddr: 5564 ppn: 58 vpn: 5 paddr_offset: 444pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59837 vaddr: 5565 ppn: 58 vpn: 5 paddr_offset: 445pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59838 vaddr: 5566 ppn: 58 vpn: 5 paddr_offset: 446pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59839 vaddr: 5567 ppn: 58 vpn: 5 paddr_offset: 447pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59840 vaddr: 5568 ppn: 58 vpn: 5 paddr_offset: 448pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59841 vaddr: 5569 ppn: 58 vpn: 5 paddr_offset: 449pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59842 vaddr: 5570 ppn: 58 vpn: 5 paddr_offset: 450pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59843 vaddr: 5571 ppn: 58 vpn: 5 paddr_offset: 451pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59844 vaddr: 5572 ppn: 58 vpn: 5 paddr_offset: 452pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59845 vaddr: 5573 ppn: 58 vpn: 5 paddr_offset: 453pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59846 vaddr: 5574 ppn: 58 vpn: 5 paddr_offset: 454pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59847 vaddr: 5575 ppn: 58 vpn: 5 paddr_offset: 455pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59848 vaddr: 5576 ppn: 58 vpn: 5 paddr_offset: 456pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59849 vaddr: 5577 ppn: 58 vpn: 5 paddr_offset: 457pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59850 vaddr: 5578 ppn: 58 vpn: 5 paddr_offset: 458pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59851 vaddr: 5579 ppn: 58 vpn: 5 paddr_offset: 459pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59852 vaddr: 5580 ppn: 58 vpn: 5 paddr_offset: 460pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59853 vaddr: 5581 ppn: 58 vpn: 5 paddr_offset: 461pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59854 vaddr: 5582 ppn: 58 vpn: 5 paddr_offset: 462pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59855 vaddr: 5583 ppn: 58 vpn: 5 paddr_offset: 463pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59856 vaddr: 5584 ppn: 58 vpn: 5 paddr_offset: 464pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59857 vaddr: 5585 ppn: 58 vpn: 5 paddr_offset: 465pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59858 vaddr: 5586 ppn: 58 vpn: 5 paddr_offset: 466pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59859 vaddr: 5587 ppn: 58 vpn: 5 paddr_offset: 467pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59860 vaddr: 5588 ppn: 58 vpn: 5 paddr_offset: 468pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59861 vaddr: 5589 ppn: 58 vpn: 5 paddr_offset: 469pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59862 vaddr: 5590 ppn: 58 vpn: 5 paddr_offset: 470pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59863 vaddr: 5591 ppn: 58 vpn: 5 paddr_offset: 471pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59864 vaddr: 5592 ppn: 58 vpn: 5 paddr_offset: 472pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59865 vaddr: 5593 ppn: 58 vpn: 5 paddr_offset: 473pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 59866 vaddr: 5594 ppn: 58 vpn: 5 paddr_offset: 474pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 1 bytes)
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 closing 2...
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 opening write.out...
+paddr: 59868 vaddr: 5596 ppn: 58 vpn: 5 paddr_offset: 476pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (fd = 2)
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 reading write.out into buffer...
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...success
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 validating write.out...
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 closing 2...
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 creating binary.out...
+paddr: 59880 vaddr: 5608 ppn: 58 vpn: 5 paddr_offset: 488pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (fd = 2)
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 writing 4096 bytes to file, 4096 bytes at a time...
+paddr: 52480 vaddr: 12544 ppn: 51 vpn: 12 paddr_offset: 256pageSize: 1024
+paddr: 51456 vaddr: 13568 ppn: 50 vpn: 13 paddr_offset: 256pageSize: 1024
+paddr: 50432 vaddr: 14592 ppn: 49 vpn: 14 paddr_offset: 256pageSize: 1024
+paddr: 49408 vaddr: 15616 ppn: 48 vpn: 15 paddr_offset: 256pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (wrote 4096 bytes)
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 closing 2...
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 opening binary.out...
+paddr: 59880 vaddr: 5608 ppn: 58 vpn: 5 paddr_offset: 488pageSize: 1024
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...passed (fd = 2)
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 reading binary.out into buffer...
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 ...success
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
 validating binary.out...
-...passed
-closing 2...
-creating binary.out...
-...passed (fd = 2)
-writing 4096 bytes to file, 128 bytes at a time...
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-...passed (wrote 128 bytes)
-closing 2...
-opening binary.out...
-...passed (fd = 2)
-reading binary.out into buffer...
-...success
-validating binary.out...
-...passed
-closing 2...
-writing to an invalid fd (-10)...
-...passed (r = -1)
-writing to an invalid fd (256)...
-...passed (r = -1)
-writing to an unopened fd (8)...
-...passed (r = -1)
-creating bad.out...
-...passed (fd = 2)
-writing count = 0 bytes...
-...passed
-writing with an invalid buffer (should not crash, only return an error)...
-...passed (r = -1)
-writing with an invalid count (should not crash, only return an error)...
-...passed (r = -1)
-writing with a buffer that extends beyond the end of the
-address space.  write should return an error.
-...passed (r = -1)
+paddr: 56320 vaddr: 8192 ppn: 55 vpn: 8 paddr_offset: 0pageSize: 1024
+...failed (offset 2816: expected À, read  )
 
-success
+nachos.machine.AssertionFailureError: ExitGrader: expected exit status of 0, but program actually exited with -1006
+	at nachos.machine.Lib.assertTrue(Lib.java:89)
+	at nachos.ag.UCSDExitGrader.finishingCurrentProcess(UCSDExitGrader.java:26)
+	at nachos.userprog.UserProcess.handleExit(UserProcess.java:415)
+	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:673)
+	at nachos.userprog.UserProcess.handleException(UserProcess.java:705)
+	at nachos.userprog.UserKernel.exceptionHandler(UserKernel.java:87)
+	at nachos.userprog.UserKernel$1.run(UserKernel.java:33)
+	at nachos.machine.Processor$MipsException.handle(Processor.java:619)
+	at nachos.machine.Processor.run(Processor.java:101)
+	at nachos.userprog.UThread.runProgram(UThread.java:31)
+	at nachos.userprog.UThread.access$000(UThread.java:11)
+	at nachos.userprog.UThread$1.run(UThread.java:20)
+	at nachos.threads.KThread.runThread(KThread.java:170)
+	at nachos.threads.KThread.access$000(KThread.java:41)
+	at nachos.threads.KThread$1.run(KThread.java:159)
+	at nachos.machine.TCB.threadroot(TCB.java:246)
+	at nachos.machine.TCB.access$100(TCB.java:25)
+	at nachos.machine.TCB$1.run(TCB.java:99)
+	at java.lang.Thread.run(Thread.java:745)
 stty: standard input: Inappropriate ioctl for device
 --[ tests exit1.c ]--
 stty: standard input: Inappropriate ioctl for device
 stty: standard input: Inappropriate ioctl for device
 nachos 5.0j initializing... config interrupt timer processor console user-check grader
+gou bi cao made   0
+vpn: 0i:0  asdas   3 ppn: 63
+zhunbeiyaopaole
 
 success
 stty: standard input: Inappropriate ioctl for device
@@ -203,14 +452,19 @@ stty: standard input: Inappropriate ioctl for device
 stty: standard input: Inappropriate ioctl for device
 stty: standard input: Inappropriate ioctl for device
 nachos 5.0j initializing... config interrupt timer processor console user-check grader
+gou bi cao made   0
+vpn: 0i:0  asdas   4 ppn: 63
+gou bi cao made   1
+vpn: 1i:0  asdas   4 ppn: 62
+zhunbeiyaopaole
 
 nachos.machine.AssertionFailureError: Unknown system call!
 	at nachos.machine.Lib.assertTrue(Lib.java:89)
 	at nachos.machine.Lib.assertNotReached(Lib.java:106)
-	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:677)
-	at nachos.userprog.UserProcess.handleException(UserProcess.java:694)
-	at nachos.userprog.UserKernel.exceptionHandler(UserKernel.java:83)
-	at nachos.userprog.UserKernel$1.run(UserKernel.java:29)
+	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:688)
+	at nachos.userprog.UserProcess.handleException(UserProcess.java:705)
+	at nachos.userprog.UserKernel.exceptionHandler(UserKernel.java:87)
+	at nachos.userprog.UserKernel$1.run(UserKernel.java:33)
 	at nachos.machine.Processor$MipsException.handle(Processor.java:619)
 	at nachos.machine.Processor.run(Processor.java:101)
 	at nachos.userprog.UThread.runProgram(UThread.java:31)
@@ -228,15 +482,26 @@ stty: standard input: Inappropriate ioctl for device
 stty: standard input: Inappropriate ioctl for device
 stty: standard input: Inappropriate ioctl for device
 nachos 5.0j initializing... config interrupt timer processor console user-check grader
+gou bi cao made   0
+vpn: 0i:0  asdas   4 ppn: 63
+gou bi cao made   1
+vpn: 1i:1  asdas   4 ppn: 62
+gou bi cao made   2
+vpn: 2i:2  asdas   4 ppn: 61
+gou bi cao made   3
+vpn: 3i:0  asdas   4 ppn: 60
+vpn: 4i:0  asdas   4 ppn: 59
+zhunbeiyaopaole
+paddr: 60416 vaddr: 4096 ppn: 59 vpn: 4 paddr_offset: 0pageSize: 1024
 execing exit1.coff...
 
 nachos.machine.AssertionFailureError: Unknown system call!
 	at nachos.machine.Lib.assertTrue(Lib.java:89)
 	at nachos.machine.Lib.assertNotReached(Lib.java:106)
-	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:677)
-	at nachos.userprog.UserProcess.handleException(UserProcess.java:694)
-	at nachos.userprog.UserKernel.exceptionHandler(UserKernel.java:83)
-	at nachos.userprog.UserKernel$1.run(UserKernel.java:29)
+	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:688)
+	at nachos.userprog.UserProcess.handleException(UserProcess.java:705)
+	at nachos.userprog.UserKernel.exceptionHandler(UserKernel.java:87)
+	at nachos.userprog.UserKernel$1.run(UserKernel.java:33)
 	at nachos.machine.Processor$MipsException.handle(Processor.java:619)
 	at nachos.machine.Processor.run(Processor.java:101)
 	at nachos.userprog.UThread.runProgram(UThread.java:31)
