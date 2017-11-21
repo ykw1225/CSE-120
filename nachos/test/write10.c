@@ -122,7 +122,6 @@ do_validate (char *fname, char *buffer, char *truth, int len)
 	printf ("...success\n");
     }
 
-
     r = 0;
     printf ("validating %s...\n", fname);
     while (r < len) {

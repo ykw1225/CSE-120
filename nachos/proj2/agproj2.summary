@@ -1,0 +1,12 @@
+------[ Thu Nov 16 15:00:22 2017 ]------
+PASS : tests write1.c
+PASS : tests write10.c
+PASS : tests exit1.c
+FAIL : tests exec1.c
+FAIL : tests join1.c
+------[ Sat Nov 18 19:00:30 2017 ]------
+PASS : tests write1.c
+FAIL : tests write10.c
+PASS : tests exit1.c
+FAIL : tests exec1.c
+FAIL : tests join1.c

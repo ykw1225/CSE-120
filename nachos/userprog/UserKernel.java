@@ -24,10 +24,12 @@ public class UserKernel extends ThreadedKernel {
 		super.initialize(args);
 
 		console = new SynchConsole(Machine.console());
-                //free_pages = new LinkedList<Integer>();
-                //for(int i = 0; i < Machine.processor().getNumPhysPages(); i++){
-                  //free_pages.add(i);
-                //}
+                free_pages = new LinkedList<Integer>();
+                for(int i = 0; i < Machine.processor().getNumPhysPages(); i++){
+                  free_pages.add(i);
+                }
+                mutex = new Lock();
+                mutex2 = new Lock();
 		Machine.processor().setExceptionHandler(new Runnable() {
 			public void run() {
 				exceptionHandler();
@@ -91,7 +93,7 @@ public class UserKernel extends ThreadedKernel {
 	 * Start running user programs, by creating a process and running a shell
 	 * program in it. The name of the shell program it must run is returned by
 	 * <tt>Machine.getShellProgramName()</tt>.
-	 * 
+	 *
 	 * @see nachos.machine.Machine#getShellProgramName
 	 */
 	public void run() {
@@ -118,5 +120,14 @@ public class UserKernel extends ThreadedKernel {
 	// dummy variables to make javac smarter
 	private static Coff dummy1 = null;
 
-        //private static LinkedList<Integer> free_pages;
+        public static LinkedList<Integer> free_pages;
+
+        public static int id_generator = 0;
+
+        public static int n_of_process = 0;
+
+        public static Lock mutex;
+
+        public static Lock mutex2;
 }
+

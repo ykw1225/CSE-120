@@ -23,3 +23,8 @@ PASS : CV2 - N sleepers, N wakers
 PASS : COMM - 1 message, 1 speak, 1 listen
 PASS : JOIN - before thread finishes
 PASS : ALARM - Tests waitUntil to ensure it waits at least minimum amount of time
+------[ Fri Oct 27 15:00:30 2017 ]------
+PASS : CV2 - N sleepers, N wakers
+PASS : COMM - 1 message, 1 speak, 1 listen
+PASS : JOIN - before thread finishes
+PASS : ALARM - Tests waitUntil to ensure it waits at least minimum amount of time
