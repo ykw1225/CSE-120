@@ -651,6 +651,11 @@ public class UserProcess {
  
         private int handleOpen(int name){
           String filename = readVirtualMemoryString(name, 256);
+
+          if(filename == null){
+            return -1;
+          }
+
           OpenFile f = ThreadedKernel.fileSystem.open(filename, false);
           if(f != null){
             int fd = -1;
