@@ -792,6 +792,10 @@ public class UserProcess {
         private int handleUnlink(int name){
           String filename = readVirtualMemoryString(name, 256);
 
+          if(filename == null){
+            return -1;
+          }
+
           //however, creat() and open() will not be able to
           //return new file descriptors for the file until it is deleted.
           if(ThreadedKernel.fileSystem.remove(filename)){
