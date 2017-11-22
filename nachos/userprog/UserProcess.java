@@ -546,6 +546,10 @@ public class UserProcess {
           String[] arguments = new String[argc];
           for(int i = 0; i < argc; i++){  
             arguments[i] = readVirtualMemoryString((argv + (i * 4)), 256);
+
+            if (arguments[i] == null) {
+              return -1;
+            }
           }
 
        
@@ -583,7 +587,7 @@ public class UserProcess {
               byte[] buffer = Lib.bytesFromInt(status_to_save);
               writeVirtualMemory(status, buffer);
               return 1;
-            } // sha bi de wen ti if already exit?? what to return???
+            }
             else{
               return 0;
             }
@@ -600,7 +604,7 @@ public class UserProcess {
             byte[] buffer = Lib.bytesFromInt(status_to_save);
             writeVirtualMemory(status, buffer);
             return 1;
-          } // sha bi de wen ti if already exit?? what to return???
+          } 
           else{
             return 0;
           }              
@@ -609,6 +613,11 @@ public class UserProcess {
 
         private int handleCreate(int name){
           String filename = readVirtualMemoryString(name, 256);
+
+          if(filename == null){
+            return -1;
+          }
+
           OpenFile f = ThreadedKernel.fileSystem.open(filename, false);
           if(f != null){
             int fd = -1;
