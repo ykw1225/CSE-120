@@ -1,0 +1,70 @@
+------[ Thu Nov 30 15:25:45 2017 ]------
+PASS : +1.92 : 1.92 : read-abc-1: Test reading short file w/ length less than file size
+PASS : +0.77 : 2.69 : read-abc-2: Test reading short file w/ length equal to file size
+PASS : +1.92 : 4.62 : read-abc-3: Test reading short file w/ length greater than file size
+PASS : +1.15 : 5.77 : read-abc-4: Read in 10 characters, "abcdefghij", from stdin
+PASS : +0.77 : 6.54 : read-abc-5: Test reading small amount repeatedly from a file
+PASS : +0.38 : 6.92 : read-err-badbuf-1: Test handling invalid buf. Read shall return -1
+PASS : +0.38 : 7.31 : read-err-badlen: Test handling invalid length. Read shall return -1
+PASS : +0.38 : 7.69 : read-err-fd-1: Test handling invalid file descriptor. Read shall return -1
+PASS : +0.38 : 8.08 : read-err-fd-2: Test handling out of range file descriptor. Read shall return -1
+PASS : +0.38 : 8.46 : read-err-fd-3: Test handling invalid buf, writing to readonly page. Read shall return -1
+PASS : +1.92 : 10.38 : read-long: Test reading large amount from file
+PASS : +1.92 : 12.31 : write-abc-1: Test writing small amount w/ length less than buf size
+PASS : +0.77 : 13.08 : write-abc-2: Test writing small amount w/ length equal to buf size
+PASS : +1.92 : 15.00 : write-abc-3: Test writing small amount to stdout
+PASS : +1.92 : 16.92 : write-abc-4: Test writing small amount repeatedly to a file
+PASS : +0.38 : 17.31 : write-err-badbuf-1: Test handling invalid buf. Read shall return -1
+PASS : +0.38 : 17.69 : write-err-badlen: Test handling invalid length. Read shall return -1
+PASS : +0.38 : 18.08 : write-err-fd-1: Test handling invalid file descriptor when calling write. Read shall return -1
+PASS : +0.38 : 18.46 : write-err-fd-2: Test handling out of range file descriptor when calling write. Read shall return -1
+PASS : +0.38 : 18.85 : write-err-fd-3: Test handling out of range file descriptor when calling write. Read shall return -1
+PASS : +1.92 : 20.77 : write-long: Test writing large amount to file
+PASS : +0.77 : 21.54 : write1: Write a string to stdout, one byte at a time
+PASS : +1.92 : 23.46 : write10: Test the write system call under a variety of good and bad conditions
+PASS : +0.77 : 24.23 : open1: Test open single file and get valid fd
+PASS : +0.38 : 24.62 : open2: Test open a file that does not exist
+PASS : +0.38 : 25.00 : open3: Check graceful failure of open when OpenFileLimit exceeded
+PASS : +0.77 : 25.77 : open4: Check that duplicate fd is not given for two different files
+PASS : +0.77 : 26.54 : open5: Check that duplicate fd is not given for same file
+PASS : +0.38 : 26.92 : open6: Check stdin and stdout not messed with i.e. fd is not assigned to new file
+PASS : +0.38 : 27.31 : open7: Check duplicate fd not given for many files
+PASS : +0.77 : 28.08 : creat1: Test creat single file and get valid fd
+PASS : +0.38 : 28.46 : creat2: Test creat a file that does not exist
+PASS : +0.38 : 28.85 : creat3: Check graceful failure of open when OpenFileLimit exceeded
+PASS : +0.77 : 29.62 : creat4: Check that duplicate fd is not given for two different files
+PASS : +0.77 : 30.38 : creat5: Check that duplicate fd is not given for same file
+PASS : +0.38 : 30.77 : creat6: Check stdin and stdout not messed with i.e. fd is not assigned to new file
+PASS : +0.00 : 30.77 : creat7: Check duplicate fd not given for many files
+PASS : +0.77 : 31.54 : unlink1: Test unlink single file and get status
+PASS : +0.38 : 31.92 : unlink2: Test unlink on invalid file
+PASS : +0.77 : 32.69 : unlink3: Test unlink single file and then try to open it, should fail
+PASS : +0.00 : 32.69 : unlink4: open file, then unlink, read to make sure we can still read
+PASS : +0.38 : 33.08 : close1: Test close bogus file descriptor returns
+PASS : +0.77 : 33.85 : close2: Test close on valid fd assuming open works
+PASS : +0.38 : 34.23 : close3: Test to close stdin
+PASS : +0.38 : 34.62 : close4: Test to close stdout
+PASS : +0.38 : 35.00 : close5: Test to close stdin/stdout and open 15 files
+PASS : +12.50 : 47.50 : exec1: Execute a simple program (one child)
+PASS : +4.17 : 51.67 : exec2: Execute multiple programs (three children)
+PASS : +0.00 : 51.67 : exec3: Execute an invalid program
+PASS : +0.00 : 51.67 : exec4: Execute a bad program (out of memory)
+FAIL : +4.17 : 51.67 : exec6: Execute with arguments
+PASS : +0.83 : 52.50 : exit1: Basic single process exit testcase
+FAIL : +1.67 : 52.50 : exit2: Test if process is freeing pages correctly on exit
+PASS : +1.67 : 54.17 : exit3: Test if process is closing the open files on exit
+FAIL : +2.50 : 54.17 : exit4: Test if exit status of child is returned to parent via join - single child
+FAIL : +1.67 : 54.17 : exit5: Test if exit status of child is returned to parent via join - multiple children
+PASS : +0.00 : 54.17 : join1: After exec-ing the child; it waits for the child to exit.
+FAIL : +2.50 : 54.17 : join2: Join to child that has not exited yet
+PASS : +1.67 : 55.83 : join3: Call join on child's child which counts as joining on a process that is not a child of the current process
+PASS : +1.67 : 57.50 : join4: Joins on a child that exits due to an unhandled exception
+PASS : +0.00 : 57.50 : join5: Exec 3 children and then join all 3
+PASS : +13.50 : 71.00 : multiprog1: Read 1024 bytes of data from a random page
+PASS : +0.00 : 71.00 : multiprog3: Check process creation and execute
+PASS : +1.50 : 72.50 : multiprog5: Pocess creation with argv > 1 page should fail
+PASS : +7.50 : 80.00 : multiprog6: check if process creation fails when memory is out of pages
+PASS : +1.50 : 81.50 : multiprog7: Read at Invalid virtual address should fail
+PASS : +1.50 : 83.00 : multiprog8: Write at Invalid virtual address should fail
+PASS : +4.50 : 87.50 : multiprog9: Free list correctness is not affected
+Autograde Score: 87.50 / 100
