@@ -25,11 +25,15 @@ public class VMKernel extends UserKernel {
                 victim = 0;
                 IPT = new Information[Machine.processor().getNumPhysPages()];
                 for(int i = 0; i < Machine.processor().getNumPhysPages(); i++){
-                  IPT[i] = new Information(null, null);
+                  IPT[i] = new Information(null, null, false);
                 }
                 swapFile = ThreadedKernel.fileSystem.open("swapFile", true);
                 freeSwapPages = new LinkedList<Integer>();
                 num_sp = 0;
+                lock = new Lock();
+                pinLock = new Lock();
+                CV = new Condition(pinLock);
+                pinCount = 0;
 	}
 
 	/**
@@ -70,13 +74,24 @@ public class VMKernel extends UserKernel {
 
         public static int num_sp;
 
+        public static Lock lock;
+        
+        public static Lock pinLock;
+
+        public static Condition CV;
+
+        public static int pinCount;
+
         protected class Information{
           public VMProcess process;
           public TranslationEntry entry;
+          public boolean pin;
 
-          public Information(VMProcess process, TranslationEntry entry){
+          public Information(VMProcess process, TranslationEntry entry, boolean pin){
             this.process = process;
             this.entry = entry;
+            this.pin = pin;
           }           
         }
 }
+
