@@ -441,7 +441,7 @@ public class UserProcess {
 	 */
 	protected void unloadSections() {
           UserKernel.mutex.acquire();
-          for(int i = 0; i < used_pages.size(); i++){
+          while(!used_pages.isEmpty()){
             UserKernel.free_pages.add(used_pages.removeLast());
           }
           UserKernel.mutex.release();
@@ -502,7 +502,6 @@ public class UserProcess {
                   children_running.get(id).parent = null;
                 }// terminated children?????????
 
-   // ---------------------------------- save the status to parent ????????>???what ?? status set to 0?????? status return to the parent
                 if(parent != null){
                   parent.children_running.remove(this.process_id);
                   if(normal){
@@ -512,7 +511,6 @@ public class UserProcess {
                   CV.wake();
                   lock.release();
                 }             
-   // ---------------------------------
                 UserKernel.mutex2.acquire();
                 if(UserKernel.n_of_process == 1){
                   UserKernel.n_of_process--;
@@ -544,8 +542,14 @@ public class UserProcess {
           }
 
           String[] arguments = new String[argc];
-          for(int i = 0; i < argc; i++){  
-            arguments[i] = readVirtualMemoryString((argv + (i * 4)), 256);
+          for(int i = 0; i < argc; i++){ 
+      
+            byte[] argBuf = new byte[4];
+            readVirtualMemory(argv + i * 4, argBuf);
+
+            int argVaddr = Lib.bytesToInt(argBuf, 0);
+            arguments[i] = readVirtualMemoryString(argVaddr, 256);
+
 
             if (arguments[i] == null) {
               return -1;
@@ -594,8 +598,9 @@ public class UserProcess {
           }
 
           children_running.get(processID).lock.acquire();
+          child = children_running.get(processID);
           children_running.get(processID).CV.sleep();
-          children_running.get(processID).lock.release();
+          child.lock.release();
 
           Integer toRemove = new Integer(processID);
           children_pid.remove(toRemove);
@@ -956,7 +961,7 @@ public class UserProcess {
 
         private OpenFile[] fileTable = new OpenFile[16];
 
-        private LinkedList<Integer> used_pages;
+        public LinkedList<Integer> used_pages;
 
         public int process_id;
 
