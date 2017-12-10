@@ -1,0 +1,15 @@
+------[ Sat Dec  9 20:00:29 2017 ]------
+--[ swap4: Tests swapping by initializing an array larger than physical memory and reading through it - does not dirty the pages again ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer processor console user-check grader
+
+success
+stty: standard input: Inappropriate ioctl for device
+--[ swap5: Tests swapping by initializing an array larger than physical memory and reading through it - dirties the pages again after initialization ]--
+stty: standard input: Inappropriate ioctl for device
+stty: standard input: Inappropriate ioctl for device
+nachos 5.0j initializing... config interrupt timer processor console user-check grader
+
+success
+stty: standard input: Inappropriate ioctl for device
