@@ -606,7 +606,7 @@ public class UserProcess {
           }
              
           if(!children_running.containsKey(processID)){
-            System.out.println("aaaaaaaaaa");
+ //System.out.println("aaaaaaaaaa");
             Integer toRemove = new Integer(processID);
             children_pid.remove(toRemove);
             if(children_stat.containsKey(processID)){
@@ -619,7 +619,7 @@ public class UserProcess {
               return 0;
             }
           }
-          System.out.println("bbbbbbb");
+ //System.out.println("bbbbbbb");
         
           children_running.get(processID).lock.acquire();
           child = children_running.get(processID);
@@ -634,7 +634,7 @@ public class UserProcess {
             byte[] buffer = Lib.bytesFromInt(status_to_save);
             writeVirtualMemory(status, buffer);
             return 1;
-          } // sha bi de wen ti if already exit?? what to return???
+          } 
           else{
             return 0;
           }             
@@ -649,16 +649,6 @@ public class UserProcess {
 
 System.out.println(" File to be created:" + filename);
 
-/*
-  int o = 0;
-  for(int i = 0; i < 16; i++){
-    if(fileTable[i] != null){
-       o++; 
-    }
-if(o==16){
-  System.out.println("  File Table Full!");
-}
-*/
 
           OpenFile f = ThreadedKernel.fileSystem.open(filename, false);
           if(f != null){

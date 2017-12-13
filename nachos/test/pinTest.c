@@ -2,7 +2,9 @@
  * pinTest.c
  *
  * test if proj3 works under multi process and all pages are pinned condition
- *
+ * When running multiple process, in StubfileSystem.java
+ * need to change maxOpenFiles to a large number so it allows to create more than 16 files
+ * otherwise it will raise exception while creating files and affects test result
  *
  */
 
@@ -10,13 +12,21 @@
 
 int main ( int argc, char*argv[])
 {
-  //char *prog = "writeTest.coff";
+  //comment or uncomment to choose the .coff file to run.
 
-  char *prog = "write101.coff";
+  char *prog = "writeTest.coff";
+
+  //char *prog = "write101.coff";
 
   //char *prog = "swap5.coff";
 
-  //char *prog1 = "write10.coff";
+  //char *prog = "join1.coff";
+
+  //char *prog = "execarg1.coff";
+
+
+
+
   int pid, r, status = 0;
 
   char *argAry[2];
@@ -32,7 +42,7 @@ int main ( int argc, char*argv[])
   int numPro = 30;
   int i;
 
-  for(i = 0; i < 4; i++){
+  for(i = 0; i < 20; i++){
     char arg[2];
 
     sprintf(arg, "%d", i);
