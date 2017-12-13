@@ -168,7 +168,7 @@ public class StubFileSystem implements FileSystem {
 
 	private int openCount = 0;
 
-	private static final int maxOpenFiles = 1000;
+	private static final int maxOpenFiles = 16;
 
 	private Privilege privilege;
 
