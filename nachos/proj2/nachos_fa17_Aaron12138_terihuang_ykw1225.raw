@@ -1,4 +1,4 @@
-------[ Thu Nov 30 14:50:26 2017 ]------
+------[ Tue Dec 12 18:23:58 2017 ]------
 --[ read-abc-1: Test reading short file w/ length less than file size ]--
 nachos 5.0j initializing... config interrupt timer processor console user-check grader
 change alarm
@@ -505,26 +505,7 @@ success
 nachos 5.0j initializing... config interrupt timer processor console user-check grader
 change alarm
 
-nachos.machine.AssertionFailureError: ExitGrader: expected exit status of 0, but program actually exited with -1
-	at nachos.machine.Lib.assertTrue(Lib.java:89)
-	at nachos.ag.UCSDExecGrader6.finishingCurrentProcess(UCSDExecGrader6.java:27)
-	at nachos.userprog.UserProcess.handleExit(UserProcess.java:490)
-	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:881)
-	at nachos.userprog.UserProcess.handleException(UserProcess.java:919)
-	at nachos.userprog.UserKernel.exceptionHandler(UserKernel.java:89)
-	at nachos.userprog.UserKernel$1.run(UserKernel.java:35)
-	at nachos.machine.Processor$MipsException.handle(Processor.java:619)
-	at nachos.machine.Processor.run(Processor.java:101)
-	at nachos.userprog.UThread.runProgram(UThread.java:31)
-	at nachos.userprog.UThread.access$000(UThread.java:11)
-	at nachos.userprog.UThread$1.run(UThread.java:20)
-	at nachos.threads.KThread.runThread(KThread.java:170)
-	at nachos.threads.KThread.access$000(KThread.java:41)
-	at nachos.threads.KThread$1.run(KThread.java:159)
-	at nachos.machine.TCB.threadroot(TCB.java:246)
-	at nachos.machine.TCB.access$100(TCB.java:25)
-	at nachos.machine.TCB$1.run(TCB.java:99)
-	at java.lang.Thread.run(Thread.java:748)
+success
 
 --[ exit1: Basic single process exit testcase ]--
 nachos 5.0j initializing... config interrupt timer processor console user-check grader
@@ -544,32 +525,9 @@ Child number 5 created with pid 6
 Child number 6 created with pid 7
 Child number 7 created with pid 8
 Child number 8 created with pid 9
+Child number 9 created with pid 10
 
-nachos.machine.AssertionFailureError: ParentChildExitGrader: expected parent status of 0, but parent actually exited with -1
--1 indicates process 1 creation failed
--2 indicates the return value of join() is incorrect
--4 indicates the status value of join() is incorrect
-
-	at nachos.machine.Lib.assertTrue(Lib.java:89)
-	at nachos.ag.UCSDParentChildExitGrader.exitCalled(UCSDParentChildExitGrader.java:77)
-	at nachos.ag.UCSDParentChildExitGrader.finishingCurrentProcess(UCSDParentChildExitGrader.java:49)
-	at nachos.userprog.UserProcess.handleExit(UserProcess.java:490)
-	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:881)
-	at nachos.userprog.UserProcess.handleException(UserProcess.java:919)
-	at nachos.userprog.UserKernel.exceptionHandler(UserKernel.java:89)
-	at nachos.userprog.UserKernel$1.run(UserKernel.java:35)
-	at nachos.machine.Processor$MipsException.handle(Processor.java:619)
-	at nachos.machine.Processor.run(Processor.java:101)
-	at nachos.userprog.UThread.runProgram(UThread.java:31)
-	at nachos.userprog.UThread.access$000(UThread.java:11)
-	at nachos.userprog.UThread$1.run(UThread.java:20)
-	at nachos.threads.KThread.runThread(KThread.java:170)
-	at nachos.threads.KThread.access$000(KThread.java:41)
-	at nachos.threads.KThread$1.run(KThread.java:159)
-	at nachos.machine.TCB.threadroot(TCB.java:246)
-	at nachos.machine.TCB.access$100(TCB.java:25)
-	at nachos.machine.TCB$1.run(TCB.java:99)
-	at java.lang.Thread.run(Thread.java:748)
+success
 
 --[ exit3: Test if process is closing the open files on exit ]--
 nachos 5.0j initializing... config interrupt timer processor console user-check grader
@@ -582,49 +540,19 @@ success
 --[ exit4: Test if exit status of child is returned to parent via join - single child ]--
 nachos 5.0j initializing... config interrupt timer processor console user-check grader
 change alarm
+Expected status is 555 and returned status is 555
 
-java.lang.NullPointerException
-	at nachos.userprog.UserProcess.handleJoin(UserProcess.java:598)
-	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:885)
-	at nachos.userprog.UserProcess.handleException(UserProcess.java:919)
-	at nachos.userprog.UserKernel.exceptionHandler(UserKernel.java:89)
-	at nachos.userprog.UserKernel$1.run(UserKernel.java:35)
-	at nachos.machine.Processor$MipsException.handle(Processor.java:619)
-	at nachos.machine.Processor.run(Processor.java:101)
-	at nachos.userprog.UThread.runProgram(UThread.java:31)
-	at nachos.userprog.UThread.access$000(UThread.java:11)
-	at nachos.userprog.UThread$1.run(UThread.java:20)
-	at nachos.threads.KThread.runThread(KThread.java:170)
-	at nachos.threads.KThread.access$000(KThread.java:41)
-	at nachos.threads.KThread$1.run(KThread.java:159)
-	at nachos.machine.TCB.threadroot(TCB.java:246)
-	at nachos.machine.TCB.access$100(TCB.java:25)
-	at nachos.machine.TCB$1.run(TCB.java:99)
-	at java.lang.Thread.run(Thread.java:748)
+success
 
 --[ exit5: Test if exit status of child is returned to parent via join - multiple children ]--
 nachos 5.0j initializing... config interrupt timer processor console user-check grader
 change alarm
 The file descriptors of the opened files are 2 and 3
+Expected status is 777 and returned status is 777
+Expected status is 666 and returned status is 666
+Expected status is 555 and returned status is 555
 
-java.lang.NullPointerException
-	at nachos.userprog.UserProcess.handleJoin(UserProcess.java:598)
-	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:885)
-	at nachos.userprog.UserProcess.handleException(UserProcess.java:919)
-	at nachos.userprog.UserKernel.exceptionHandler(UserKernel.java:89)
-	at nachos.userprog.UserKernel$1.run(UserKernel.java:35)
-	at nachos.machine.Processor$MipsException.handle(Processor.java:619)
-	at nachos.machine.Processor.run(Processor.java:101)
-	at nachos.userprog.UThread.runProgram(UThread.java:31)
-	at nachos.userprog.UThread.access$000(UThread.java:11)
-	at nachos.userprog.UThread$1.run(UThread.java:20)
-	at nachos.threads.KThread.runThread(KThread.java:170)
-	at nachos.threads.KThread.access$000(KThread.java:41)
-	at nachos.threads.KThread$1.run(KThread.java:159)
-	at nachos.machine.TCB.threadroot(TCB.java:246)
-	at nachos.machine.TCB.access$100(TCB.java:25)
-	at nachos.machine.TCB$1.run(TCB.java:99)
-	at java.lang.Thread.run(Thread.java:748)
+success
 
 --[ join1: After exec-ing the child; it waits for the child to exit. ]--
 nachos 5.0j initializing... config interrupt timer processor console user-check grader
@@ -646,25 +574,10 @@ child causing delay before exiting, 2 of 5
 child causing delay before exiting, 3 of 5
 child causing delay before exiting, 4 of 5
 child causing delay before exiting, 5 of 5
+...return val passed
+...status passed
 
-java.lang.NullPointerException
-	at nachos.userprog.UserProcess.handleJoin(UserProcess.java:598)
-	at nachos.userprog.UserProcess.handleSyscall(UserProcess.java:885)
-	at nachos.userprog.UserProcess.handleException(UserProcess.java:919)
-	at nachos.userprog.UserKernel.exceptionHandler(UserKernel.java:89)
-	at nachos.userprog.UserKernel$1.run(UserKernel.java:35)
-	at nachos.machine.Processor$MipsException.handle(Processor.java:619)
-	at nachos.machine.Processor.run(Processor.java:101)
-	at nachos.userprog.UThread.runProgram(UThread.java:31)
-	at nachos.userprog.UThread.access$000(UThread.java:11)
-	at nachos.userprog.UThread$1.run(UThread.java:20)
-	at nachos.threads.KThread.runThread(KThread.java:170)
-	at nachos.threads.KThread.access$000(KThread.java:41)
-	at nachos.threads.KThread$1.run(KThread.java:159)
-	at nachos.machine.TCB.threadroot(TCB.java:246)
-	at nachos.machine.TCB.access$100(TCB.java:25)
-	at nachos.machine.TCB$1.run(TCB.java:99)
-	at java.lang.Thread.run(Thread.java:748)
+success
 
 --[ join3: Call join on child's child which counts as joining on a process that is not a child of the current process ]--
 nachos 5.0j initializing... config interrupt timer processor console user-check grader

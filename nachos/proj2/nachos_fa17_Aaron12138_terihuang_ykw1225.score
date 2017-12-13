@@ -1,4 +1,4 @@
-------[ Thu Nov 30 15:25:45 2017 ]------
+------[ Tue Dec 12 18:24:16 2017 ]------
 PASS : +1.92 : 1.92 : read-abc-1: Test reading short file w/ length less than file size
 PASS : +0.77 : 2.69 : read-abc-2: Test reading short file w/ length equal to file size
 PASS : +1.92 : 4.62 : read-abc-3: Test reading short file w/ length greater than file size
@@ -49,22 +49,22 @@ PASS : +12.50 : 47.50 : exec1: Execute a simple program (one child)
 PASS : +4.17 : 51.67 : exec2: Execute multiple programs (three children)
 PASS : +0.00 : 51.67 : exec3: Execute an invalid program
 PASS : +0.00 : 51.67 : exec4: Execute a bad program (out of memory)
-FAIL : +4.17 : 51.67 : exec6: Execute with arguments
-PASS : +0.83 : 52.50 : exit1: Basic single process exit testcase
-FAIL : +1.67 : 52.50 : exit2: Test if process is freeing pages correctly on exit
-PASS : +1.67 : 54.17 : exit3: Test if process is closing the open files on exit
-FAIL : +2.50 : 54.17 : exit4: Test if exit status of child is returned to parent via join - single child
-FAIL : +1.67 : 54.17 : exit5: Test if exit status of child is returned to parent via join - multiple children
-PASS : +0.00 : 54.17 : join1: After exec-ing the child; it waits for the child to exit.
-FAIL : +2.50 : 54.17 : join2: Join to child that has not exited yet
-PASS : +1.67 : 55.83 : join3: Call join on child's child which counts as joining on a process that is not a child of the current process
-PASS : +1.67 : 57.50 : join4: Joins on a child that exits due to an unhandled exception
-PASS : +0.00 : 57.50 : join5: Exec 3 children and then join all 3
-PASS : +13.50 : 71.00 : multiprog1: Read 1024 bytes of data from a random page
-PASS : +0.00 : 71.00 : multiprog3: Check process creation and execute
-PASS : +1.50 : 72.50 : multiprog5: Pocess creation with argv > 1 page should fail
-PASS : +7.50 : 80.00 : multiprog6: check if process creation fails when memory is out of pages
-PASS : +1.50 : 81.50 : multiprog7: Read at Invalid virtual address should fail
-PASS : +1.50 : 83.00 : multiprog8: Write at Invalid virtual address should fail
-PASS : +4.50 : 87.50 : multiprog9: Free list correctness is not affected
-Autograde Score: 87.50 / 100
+PASS : +4.17 : 55.83 : exec6: Execute with arguments
+PASS : +0.83 : 56.67 : exit1: Basic single process exit testcase
+PASS : +1.67 : 58.33 : exit2: Test if process is freeing pages correctly on exit
+PASS : +1.67 : 60.00 : exit3: Test if process is closing the open files on exit
+PASS : +2.50 : 62.50 : exit4: Test if exit status of child is returned to parent via join - single child
+PASS : +1.67 : 64.17 : exit5: Test if exit status of child is returned to parent via join - multiple children
+PASS : +0.00 : 64.17 : join1: After exec-ing the child; it waits for the child to exit.
+PASS : +2.50 : 66.67 : join2: Join to child that has not exited yet
+PASS : +1.67 : 68.33 : join3: Call join on child's child which counts as joining on a process that is not a child of the current process
+PASS : +1.67 : 70.00 : join4: Joins on a child that exits due to an unhandled exception
+PASS : +0.00 : 70.00 : join5: Exec 3 children and then join all 3
+PASS : +13.50 : 83.50 : multiprog1: Read 1024 bytes of data from a random page
+PASS : +0.00 : 83.50 : multiprog3: Check process creation and execute
+PASS : +1.50 : 85.00 : multiprog5: Pocess creation with argv > 1 page should fail
+PASS : +7.50 : 92.50 : multiprog6: check if process creation fails when memory is out of pages
+PASS : +1.50 : 94.00 : multiprog7: Read at Invalid virtual address should fail
+PASS : +1.50 : 95.50 : multiprog8: Write at Invalid virtual address should fail
+PASS : +4.50 : 100.00 : multiprog9: Free list correctness is not affected
+Autograde Score: 100.00 / 100
