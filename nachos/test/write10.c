@@ -27,7 +27,7 @@ do_creat (char *fname) {
     if (fd >= 0) {
 	printf ("...passed (fd = %d)\n", fd);
     } else {
-	printf ("...failed (%d)\n", fd);
+	printf ("*******************************************************************************************************************(%d)\n", fd);
 	exit (-1001);
     }
     return fd;
@@ -42,7 +42,7 @@ do_open (char *fname) {
     if (fd >= 0) {
 	printf ("...passed (fd = %d)\n", fd);
     } else {
-	printf ("...failed (%d)\n", fd);
+	printf ("----------------------------------------------------------------------------------------444444444444444444444444444------ (%d)\n", fd);
 	exit (-1002);
     }
     return fd;
@@ -55,7 +55,7 @@ do_close (int fd) {
     printf ("closing %d...\n", fd);
     r = close (fd);
     if (r < 0) {
-	printf ("...failed (r = %d)\n", r);
+	printf ("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++(r = %d)\n", r);
 	exit (-1003);
     }
 }
@@ -78,10 +78,10 @@ do_write (char *fname, char *buffer, int len, int stride)
 	int n = ((remain < stride) ? remain : stride);
 	r = write (fd, ptr, n);
 	if (r < 0) {
-	    printf ("...failed (r = %d)\n", r);
+	    printf ("////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// (r = %d)\n", r);
 	    exit (-1004);
 	} else if (r != n) {
-	    printf ("...failed (expected to write %d bytes, but wrote %d)\n", n, r);
+	    printf ("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ (expected to write %d bytes, but wrote %d)\n", n, r);
 	    exit (-1005);
 	} else {
 	    printf ("...passed (wrote %d bytes)\n", r);
@@ -111,11 +111,11 @@ do_validate (char *fname, char *buffer, char *truth, int len)
     printf ("reading %s into buffer...\n", fname);
     r = read (fd, buffer, len);
     if (r < 0) {
-	printf ("...failed (r = %d)\n", r);
+	printf ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! (r = %d)\n", r);
 	do_close (fd);
 	return;
     } else if (r != len) {
-	printf ("...failed (expected to read %d bytes, but read %d)\n", len, r);
+	printf ("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (expected to read %d bytes, but read %d)\n", len, r);
 	do_close (fd);
 	return;
     } else {
@@ -126,7 +126,7 @@ do_validate (char *fname, char *buffer, char *truth, int len)
     printf ("validating %s...\n", fname);
     while (r < len) {
 	if (buffer[r] != truth[r]) {
-	    printf ("...failed (offset %d: expected %c, read %c)\n",
+	    printf ("################################################################################################################################# (offset %d: expected %c, read %c)\n",
 		    r, truth[r], buffer[r]);
 	    exit (-1006);
 	    break;
@@ -191,7 +191,7 @@ main ()
     if (r < 0) {
 	printf ("...passed (r = %d)\n", r);
     } else {
-	printf ("...failed (r = %d, should be -1)\n", r);
+	printf ("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ (r = %d, should be -1)\n", r);
 	exit (-2000);
     }
 
@@ -201,7 +201,7 @@ main ()
     if (r < 0) {
 	printf ("...passed (r = %d)\n", r);
     } else {
-	printf ("...failed (r = %d, should be -1)\n", r);
+	printf ("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& (r = %d, should be -1)\n", r);
 	exit (-3000);
     }
 
@@ -211,7 +211,7 @@ main ()
     if (r < 0) {
 	printf ("...passed (r = %d)\n", r);
     } else {
-	printf ("...failed (r = %d, should be -1)\n", r);
+	printf ("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb (r = %d, should be -1)\n", r);
 	exit (-4000);
     }
 
@@ -224,7 +224,7 @@ main ()
     if (r == 0) {
 	printf ("...passed\n");
     } else {
-	printf ("...failed (r = %d)\n", r);
+	printf ("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu  (r = %d)\n", r);
 	exit (-5000);
     }
 
@@ -233,7 +233,7 @@ main ()
     if (r < 0) {
 	printf ("...passed (r = %d)\n", r);
     } else {
-	printf ("...failed (r = %d)\n", r);
+	printf ("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz (r = %d)\n", r);
 	exit (-6000);
     }
 
@@ -243,7 +243,7 @@ main ()
     if (r < 0) {
 	printf ("...passed (r = %d)\n", r);
     } else {
-	printf ("...failed (r = %d)\n", r);
+	printf ("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm (r = %d)\n", r);
 	exit (-7000);
     }
 
@@ -251,7 +251,7 @@ main ()
     printf ("address space.  write should return an error.\n");
     r = write (fd, (char *) 0, (80 * 1024));
     if (r > 0) {
-	printf ("...failed (r = %d)\n", r);
+	printf ("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk (r = %d)\n", r);
 	exit (-8000);
     } else {
 	printf ("...passed (r = %d)\n", r);

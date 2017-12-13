@@ -402,18 +402,20 @@ public class UserProcess {
                   pageTable[i] = new TranslationEntry(i, i, true, false, false, false);
                 }
 		// load sections
+	        System.out.println(  "  Process[" + process_id + "] loadSection");
 		for (int s = 0; s < coff.getNumSections(); s++) {
 			CoffSection section = coff.getSection(s);
 
 			Lib.debug(dbgProcess, "\tinitializing " + section.getName()
 					+ " section (" + section.getLength() + " pages)");
-
+                        
 			for (int i = 0; i < section.getLength(); i++) {
 				int vpn = section.getFirstVPN() + i;
 				// for now, just assume virtual addresses=physical addresses
 				int ppn = UserKernel.free_pages.removeLast();
                                 track = vpn;
                                 used_pages.add(ppn);
+                                System.out.println("  " +ppn + "assigned to Process[" + process_id + "]");
 				section.loadPage(i, ppn); // this load to PMem?
                                 if(section.isReadOnly()){
                                   pageTable[count] = new TranslationEntry(vpn, ppn, true, true, false, false);
@@ -430,6 +432,7 @@ public class UserProcess {
                 for(int i = 0; i < pages_left; i++){
                   int ppn = UserKernel.free_pages.removeLast();
                   used_pages.add(ppn);
+                  System.out.println("  " + ppn + "assigned to Process[" + process_id + "]");
                   pageTable[count + i] = new TranslationEntry(track + i, ppn, true, false, false, false);
                 } 
                 UserKernel.mutex.release();
@@ -441,9 +444,13 @@ public class UserProcess {
 	 */
 	protected void unloadSections() {
           UserKernel.mutex.acquire();
+          System.out.println("  Process[" + process_id + "] unloadSection");
           while(!used_pages.isEmpty()){
             UserKernel.free_pages.add(used_pages.removeLast());
           }
+          System.out.println("  used page.size: " + used_pages.size());
+
+          System.out.println("  free page.size: " + UserKernel.free_pages.size());
           UserKernel.mutex.release();
 	}
 
@@ -488,6 +495,17 @@ public class UserProcess {
 	 */
 	private int handleExit(int status) {
 		Machine.autoGrader().finishingCurrentProcess(status);
+
+
+
+
+
+                System.out.println("Proccess["+ process_id +"]Exit status(handleExit) " + status);
+                System.out.println("  " + normal);
+                //System.out.println("hao");
+
+
+
                 for(int i = 0; i < 16; i++){
                   if(fileTable[i] != null){
                     fileTable[i].close();
@@ -502,15 +520,22 @@ public class UserProcess {
                   children_running.get(id).parent = null;
                 }// terminated children?????????
 
+   // ---------------------------------- save the status to parent ????????>???what ?? status set to 0?????? status return to the parent
                 if(parent != null){
                   parent.children_running.remove(this.process_id);
-                  if(normal){
+                  if(normal){ 
+
+
+                    System.out.println("-Process[" + process_id + "] Exit Status(removing child): " + status);
+
+
                     parent.children_stat.put(this.process_id, status);
                   }
                   lock.acquire();  
                   CV.wake();
                   lock.release();
                 }             
+   // ---------------------------------
                 UserKernel.mutex2.acquire();
                 if(UserKernel.n_of_process == 1){
                   UserKernel.n_of_process--;
@@ -542,16 +567,13 @@ public class UserProcess {
           }
 
           String[] arguments = new String[argc];
-          for(int i = 0; i < argc; i++){ 
-      
-            byte[] argBuf = new byte[4];
-            readVirtualMemory(argv + i * 4, argBuf);
-
-            int argVaddr = Lib.bytesToInt(argBuf, 0);
-            arguments[i] = readVirtualMemoryString(argVaddr, 256);
-
-
-            if (arguments[i] == null) {
+          for(int i = 0; i < argc; i++){  
+            byte[] pointer = new byte[4];
+            readVirtualMemory(argv + i * 4, pointer);
+            int vaddr = Lib.bytesToInt(pointer, 0);
+            arguments[i] = readVirtualMemoryString(vaddr, 256);
+//System.out.println((String)arguments[i]);
+            if(arguments[i] == null){
               return -1;
             }
           }
@@ -584,6 +606,7 @@ public class UserProcess {
           }
              
           if(!children_running.containsKey(processID)){
+            System.out.println("aaaaaaaaaa");
             Integer toRemove = new Integer(processID);
             children_pid.remove(toRemove);
             if(children_stat.containsKey(processID)){
@@ -591,15 +614,17 @@ public class UserProcess {
               byte[] buffer = Lib.bytesFromInt(status_to_save);
               writeVirtualMemory(status, buffer);
               return 1;
-            }
+            } // sha bi de wen ti if already exit?? what to return???
             else{
               return 0;
             }
           }
-
+          System.out.println("bbbbbbb");
+        
           children_running.get(processID).lock.acquire();
           child = children_running.get(processID);
           children_running.get(processID).CV.sleep();
+          //children_running.get(processID).lock.release();
           child.lock.release();
 
           Integer toRemove = new Integer(processID);
@@ -609,19 +634,31 @@ public class UserProcess {
             byte[] buffer = Lib.bytesFromInt(status_to_save);
             writeVirtualMemory(status, buffer);
             return 1;
-          } 
+          } // sha bi de wen ti if already exit?? what to return???
           else{
             return 0;
-          }              
+          }             
         }
 
 
         private int handleCreate(int name){
           String filename = readVirtualMemoryString(name, 256);
-
           if(filename == null){
             return -1;
           }
+
+System.out.println(" File to be created:" + filename);
+
+/*
+  int o = 0;
+  for(int i = 0; i < 16; i++){
+    if(fileTable[i] != null){
+       o++; 
+    }
+if(o==16){
+  System.out.println("  File Table Full!");
+}
+*/
 
           OpenFile f = ThreadedKernel.fileSystem.open(filename, false);
           if(f != null){
@@ -656,11 +693,9 @@ public class UserProcess {
  
         private int handleOpen(int name){
           String filename = readVirtualMemoryString(name, 256);
-
           if(filename == null){
             return -1;
           }
-
           OpenFile f = ThreadedKernel.fileSystem.open(filename, false);
           if(f != null){
             int fd = -1;
@@ -796,7 +831,6 @@ public class UserProcess {
 
         private int handleUnlink(int name){
           String filename = readVirtualMemoryString(name, 256);
-
           if(filename == null){
             return -1;
           }
@@ -934,7 +968,8 @@ public class UserProcess {
                         normal = false;
                         handleExit(-1);
 			Lib.debug(dbgProcess, "Unexpected exception: "
-					+ Processor.exceptionNames[cause]);System.out.println(Processor.exceptionNames[cause]);
+					+ Processor.exceptionNames[cause]);
+System.out.println(Processor.exceptionNames[cause]);
 			Lib.assertNotReached("Unexpected exception");
 		}
 	}

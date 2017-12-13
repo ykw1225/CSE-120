@@ -30,9 +30,8 @@ public class VMKernel extends UserKernel {
                 swapFile = ThreadedKernel.fileSystem.open("swapFile", true);
                 freeSwapPages = new LinkedList<Integer>();
                 num_sp = 0;
-                lock = new Lock();
-                pinLock = new Lock();
-                CV = new Condition(pinLock);
+                vmmutex = new Lock();
+                CV = new Condition(vmmutex);
                 pinCount = 0;
 	}
 
@@ -73,10 +72,8 @@ public class VMKernel extends UserKernel {
         public static OpenFile swapFile;
 
         public static int num_sp;
-
-        public static Lock lock;
-        
-        public static Lock pinLock;
+     
+        public static Lock vmmutex;
 
         public static Condition CV;
 
@@ -94,4 +91,3 @@ public class VMKernel extends UserKernel {
           }           
         }
 }
-
